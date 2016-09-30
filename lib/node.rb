@@ -1,6 +1,6 @@
 class Node
 
-  attr_accessor :strRepresentation, :path, :state
+  attr_accessor :strRepresentation, :path, :state, :value, :emptyRow, :emptyCol
 
   def initialize(value, state, emptyRow, emptyCol, depth)
 
@@ -9,13 +9,12 @@ class Node
     @emptyRow = emptyRow # location of en empty tile
     @emptyCol = emptyCol
     @depth = depth # g(s)
-
-    @strRepresentation = ""
+    @stringRepresentation = ""
     @path = ""
   end
 
-  def representationToString
-    @strRepresentation << @state.flatten.join(",")
+  def stringRepresentation
+    @stringRepresentation = @state.flatten.join(",")
   end
 
 
