@@ -1,7 +1,7 @@
 require 'pqueue'
 
 class Astar
-  attr_reader :visited, :strRepresentation, :state, :value
+  attr_accessor :visited, :strRepresentation, :state, :value, :empty, :depth, :queue
 
   def initialize(initial, goal, empty)
     @initial = initial
@@ -12,26 +12,18 @@ class Astar
   end
 
   def queue
-    @queue = PQueue.new([@initial]){ |a,b|
-      if a.value > b.value
-        return 1
-      elsif a.value < b.value
-        return -1
-      else
-        return 0
-      end }
-    return @queue
+    @queue = PQueue.new([@initial]){ |a, b| a.value > b.value }
   end
 
   def execute
     @visited.concat([@initial.stringRepresentation])
-
     while @queue.length > 0
+      p @queue
       @current = @queue.pop
-      @current.stringRepresentation == @goal.stringRepresentation ? @current : @current = ExpandNode.new(@current).movesEmptyNode
+      @current.stringRepresentation == @goal.stringRepresentation ? @current : @current = ExpandNode.new(@current).movesEmptyNode(@visited, @queue)
     end
 
-    return @current
+    # return @current
   end
 
 end
