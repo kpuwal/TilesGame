@@ -1,18 +1,27 @@
-require 'pqueue'
 
 class Testing
-  def initialize(goal)
-    @goal = goal
+
+  def initialize(array)
+    @array = array
   end
 
-  def heuristics(node)
-    @result = 0
-    for i in 0..2 do
-      for j in 0..2 do
-        @result+=1 if node.state[i][j] != @goal.state[i][j]
-      end
+  def reverse
+
+    a = @array.deep_clone
+    a.each do |x|
+      x.reverse!
     end
 
-    return @result
+    p a
+
+    b = @array.deep_clone
+    p b
+  end
+
+end
+
+class Object
+  def deep_clone
+    Marshal::load(Marshal.dump(self))
   end
 end

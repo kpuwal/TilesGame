@@ -3,12 +3,11 @@ class Node
   attr_accessor :strRepresentation, :path, :state, :value, :emptyRow, :emptyCol, :depth
 
   def initialize(value, state, emptyRow, emptyCol, depth)
-
-    @value = value # expected value f(s)
-    @state = state # state of board as 2D array
-    @emptyRow = emptyRow # location of en empty tile
+    @value = value
+    @state = state
+    @emptyRow = emptyRow
     @emptyCol = emptyCol
-    @depth = depth # g(s)
+    @depth = depth
     @stringRepresentation = ""
     @path = ""
   end
@@ -16,6 +15,5 @@ class Node
   def stringRepresentation
     @stringRepresentation = @state.flatten.join(",")
   end
-
 
 end

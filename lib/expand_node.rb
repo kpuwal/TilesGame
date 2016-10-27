@@ -1,112 +1,93 @@
 # require 'pqueue'
 require_relative 'misplaced_tiles'
+require_relative 'manhattan_distance'
 require_relative 'astar'
 require_relative 'node'
+require_relative 'deep_clone'
 
 class ExpandNode
 
-  extend MisplacedTiles
-  # extend PriorityQueue
+  # extend MisplacedTiles
+  extend ManhattanDistance
 
-  attr_accessor :empty, :visited, :stringRepresentation, :queue
+  attr_accessor :visited, :queue, :stringRepresentation
 
   def initialize(node)
-    @newState = node.state.clone
+    @newState = node.state
     @row = node.emptyRow
     @column = node.emptyCol
     @depth = node.depth
     @nodeSize = node.state.length
-    # @newNode = 0
-    @temp = 0
-    @empty = 0
     @path = node.path
   end
 
+
   def movesEmptyNode(visited, queue)
-# go up
+
     if @row > 0
-      tileSwap(@row - 1, @column)
-      @newNode = Node.new(0, @newState, @row - 1, @column,  @depth + 1)
+      stateUp = @newState.deep_clone
+      state = tileSwap(stateUp, @row - 1, @column)
+      p newNode = Node.new(0, state, @row - 1, @column,  @depth + 1)
+      p "one"
 
-      if !visited.include?(@newNode.stringRepresentation)
-        update(visited, queue)
-        @newNode.path = @path + "U"
+      if !visited.include?(newNode.stringRepresentation)
+        update(newNode, visited, queue)
+        newNode.path = @path + "U"
       end
     end
 
-# go down
     if @row < @nodeSize - 1
-      p @empty
-      tileSwap(@row + 1, @column)
-      @newNode = Node.new(0, @newState, @row + 1, @column,  @depth + 1)
+      stateDown = @newState.deep_clone
+      state = tileSwap(stateDown, @row + 1, @column)
+      p newNode = Node.new(0, state, @row + 1, @column,  @depth + 1)
+      p "two"
 
-      if !visited.include?(@newNode.stringRepresentation)
-        update(visited, queue)
-        @newNode.path = @path + "D"
+      if !visited.include?(newNode.stringRepresentation)
+        update(newNode, visited, queue)
+        newNode.path = @path + "D"
       end
     end
 
-# go left
     if @column > 0
-      p @empty
-      tileSwap(@row, @column - 1)
-      @newNode = Node.new(0, @newState, @row, @column - 1,  @depth + 1)
+      stateLeft = @newState.deep_clone
+      state = tileSwap(stateLeft, @row, @column - 1)
+      p newNode = Node.new(0, state, @row, @column - 1,  @depth + 1)
+      p "three"
 
-      if !visited.include?(@newNode.stringRepresentation)
-        update(visited, queue)
-        @newNode.path = @path + "L"
+      if !visited.include?(newNode.stringRepresentation)
+        update(newNode, visited, queue)
+        newNode.path = @path + "L"
       end
     end
 
-# go right
     if @column < @nodeSize - 1
-      p @empty
-      tileSwap(@row, @column + 1)
-      @newNode = Node.new(0, @newState, @row, @column + 1,  @depth + 1)
+      stateRight = @newState.deep_clone
+      state = tileSwap(stateRight, @row, @column + 1)
+      p newNode = Node.new(0, state, @row, @column + 1,  @depth + 1)
+      p "four"
 
-      if !visited.include?(@newNode.stringRepresentation)
-        update(visited, queue)
-        @newNode.path = @path + "R"
+      if !visited.include?(newNode.stringRepresentation)
+        update(newNode, visited, queue)
+        newNode.path = @path + "R"
       end
     end
-    
+
   end
 
   private
 
-  def up(node)
-    if @row > 0
-      tileSwap(@row - 1, @column)
-      @newNode = Node.new(0, @newState, @row - 1, @column,  @depth + 1)
-      if !visited.include?(@newNode.stringRepresentation)
-        update(visited, queue)
-        @newNode.path = @path + "U"
-      end
-    end
+  def tileSwap(state, row, column)
+    temp = state[row][column]
+    state[row][column] = 0
+    state[@row][@column] = temp
+    return state
   end
 
-  def down(node)
-    if @row < @nodeSize - 1
-      tileSwap(@row + 1, @column)
-      @newNode = Node.new(0, @newState, @row + 1, @column,  @depth + 1)
-
-      if !visited.include?(@newNode.stringRepresentation)
-        update(visited, queue)
-        @newNode.path = @path + "D"
-      end
-    end
-  end
-
-  def tileSwap(row, column)
-    @temp = @newState[row][column]
-    @newState[row][column] = @empty
-    @newState[@row][@column] = @temp
-  end
-
-  def update(visited, queue)
-    @newNode.value = @newNode.depth + MisplacedTiles.heuristics(@newNode)
-    queue.push(@newNode)
-    visited.push(@newNode.stringRepresentation)
+  def update(newNode, visited, queue)
+    p ManhattanDistance.heuristics(newNode)
+    newNode.value = newNode.depth + ManhattanDistance.heuristics(newNode)
+    queue.push(newNode)
+    visited.push(newNode.stringRepresentation)
   end
 
 end

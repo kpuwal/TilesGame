@@ -1,29 +1,34 @@
 require 'pqueue'
 
 class Astar
-  attr_accessor :visited, :strRepresentation, :state, :value, :empty, :depth, :queue
+  attr_accessor :stringRepresentation, :visited, :queue, :path
 
-  def initialize(initial, goal, empty)
+  def initialize(initial, goal)
     @initial = initial
     @goal = goal
-    @empty = empty
     @visited = []
-    @current = 0
   end
 
   def queue
-    @queue = PQueue.new([@initial]){ |a, b| a.value > b.value }
+    @queue = PQueue.new([@initial]){ |a, b| a.value < b.value }
   end
 
   def execute
     @visited.concat([@initial.stringRepresentation])
     while @queue.length > 0
-      p @queue
-      @current = @queue.pop
-      @current.stringRepresentation == @goal.stringRepresentation ? @current : @current = ExpandNode.new(@current).movesEmptyNode(@visited, @queue)
+      current = @queue.pop
+p @queue
+p current
+      if current.stringRepresentation === @goal.stringRepresentation
+        return current
+      else
+        ExpandNode.new(current).movesEmptyNode(@visited, @queue)
+      end
+
+      # current.stringRepresentation == @goal.stringRepresentation ? "finished" : current = ExpandNode.new(current).movesEmptyNode(@visited, @queue)
     end
 
-    # return @current
+
   end
 
 end
