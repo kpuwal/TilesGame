@@ -52,7 +52,6 @@ class ExpandNode
       stateLeft = @newState.deep_clone
       state = tileSwap(stateLeft, @row, @column - 1)
       p newNode = Node.new(0, state, @row, @column - 1,  @depth + 1)
-      p "three"
 
       if !visited.include?(newNode.stringRepresentation)
         update(newNode, visited, queue)
@@ -64,7 +63,6 @@ class ExpandNode
       stateRight = @newState.deep_clone
       state = tileSwap(stateRight, @row, @column + 1)
       p newNode = Node.new(0, state, @row, @column + 1,  @depth + 1)
-      p "four"
 
       if !visited.include?(newNode.stringRepresentation)
         update(newNode, visited, queue)
@@ -84,10 +82,10 @@ class ExpandNode
   end
 
   def update(newNode, visited, queue)
-    p ManhattanDistance.heuristics(newNode)
     newNode.value = newNode.depth + ManhattanDistance.heuristics(newNode)
+    p "value: #{newNode.value}"
     queue.push(newNode)
-    visited.push(newNode.stringRepresentation)
+    visited.add(newNode.stringRepresentation)
   end
 
 end

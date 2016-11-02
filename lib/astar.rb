@@ -1,4 +1,5 @@
 require 'pqueue'
+require 'set'
 
 class Astar
   attr_accessor :stringRepresentation, :visited, :queue, :path
@@ -6,7 +7,7 @@ class Astar
   def initialize(initial, goal)
     @initial = initial
     @goal = goal
-    @visited = []
+    @visited = Set.new
   end
 
   def queue
@@ -14,7 +15,7 @@ class Astar
   end
 
   def execute
-    @visited.concat([@initial.stringRepresentation])
+    @visited.add([@initial.stringRepresentation])
     while @queue.length > 0
       current = @queue.pop
 p @queue
