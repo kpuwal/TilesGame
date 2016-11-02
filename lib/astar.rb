@@ -18,18 +18,12 @@ class Astar
     @visited.add([@initial.stringRepresentation])
     while @queue.length > 0
       current = @queue.pop
-p @queue
-p current
+
       if current.stringRepresentation === @goal.stringRepresentation
         return current
       else
         ExpandNode.new(current).movesEmptyNode(@visited, @queue)
       end
-
-      # current.stringRepresentation == @goal.stringRepresentation ? "finished" : current = ExpandNode.new(current).movesEmptyNode(@visited, @queue)
     end
-
-
   end
-
 end
