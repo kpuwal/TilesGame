@@ -1,4 +1,3 @@
-# require 'pqueue'
 require_relative 'misplaced_tiles'
 require_relative 'manhattan_distance'
 require_relative 'astar'
@@ -81,7 +80,6 @@ class ExpandNode
 
   def update(newNode, visited, queue)
     newNode.value = newNode.depth + ManhattanDistance.heuristics(newNode)
-    # p "value: #{newNode.value}"
     queue.push(newNode)
     visited.add(newNode.stringRepresentation)
   end

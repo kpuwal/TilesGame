@@ -8,10 +8,7 @@ class Astar
     @initial = initial
     @goal = goal
     @visited = Set.new
-  end
-
-  def queue
-    @queue = PQueue.new([@initial]){ |a, b| a.value < b.value }
+    @queue = PQueue.new([initial]){ |a, b| a.value < b.value }
   end
 
   def execute

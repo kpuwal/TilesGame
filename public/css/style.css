@@ -1,0 +1,146 @@
+
+body {
+	background-color: #FFF6ED;
+}
+
+header {
+	width: 90%;
+	height: 50px;
+	border-bottom: solid 1px #8D2720;
+	padding-left: 6%;
+	color: #8D2720;
+	font-family: Krungthep;
+}
+
+header span {
+	font-size: 50%;
+}
+
+.container {
+	padding-top: 3%;
+	width:1024px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height:380px;
+}
+
+.grid-container {
+	float: left;
+	width: 152px;
+	height: 252px;
+	text-align: center;
+	width:30%;
+}
+
+.grid-container h2 {
+	color: #8D2720;
+	font-family: Krungthep;
+}
+
+.grid {
+	background-color: #FFF6ED;
+	border: solid 1px #8D2720;
+	width:252px;
+	height:252px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 2px;
+	box-shadow: 3px 3px #B7D8BD, 3px 3px #B7D8BD;
+	overflow: auto;
+}
+
+.small_grid {
+	background-color: #FFF6ED;
+	border: solid 1px #8D2720;
+	width:90px;
+	height:90px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 2px;
+	overflow: auto;
+}
+
+.grid-container button {
+	margin-top:30px;
+	background-color: #FFF6ED;
+	color: #8D2720;
+	text-transform: uppercase;
+	height:40px;
+	font-weight: bold;
+	border: solid 1px #8D2720;
+	border-radius: 2px;
+}
+
+.row {
+	height:33.33%;
+}
+
+.cell {
+	width:84px;
+	height:100%;
+	float: left;
+	background-image: url('../img/triangle.png');
+	/*background-image: url('../img/triangle.png');*/
+	background-size: 84px 84px;
+	background-color: #71C3B0;
+	text-align: center;
+	color: #8D2720;
+	font-size:190%;
+	font-family: Krungthep;
+	font-weight: bold;
+	position:relative;
+	-webkit-box-shadow:inset 0px 0px 0px 0.5px #8D2720;
+  -moz-box-shadow:inset 0px 0px 0px 0.5px #8D2720;
+  box-shadow:inset 0px 0px 0px 0.5px #8D2720;
+}
+
+.small_cell {
+	width:30px;
+	height:100%;
+	float: left;
+	text-align: center;
+	color: #8D2720;
+	font-size:80%;
+	font-family: Krungthep;
+	font-weight: bold;
+	position:relative;
+	-webkit-box-shadow:inset 0px 0px 0px 0.5px #8D2720;
+  -moz-box-shadow:inset 0px 0px 0px 0.5px #8D2720;
+  box-shadow:inset 0px 0px 0px 0.5px #8D2720;
+}
+
+.red {
+	background-color: #E88676;
+}
+
+.yellow {
+	background-color: #F0D577;
+}
+
+.empty {
+	background-color: #B7D8BD;
+}
+
+.cell:hover {
+	background-color: #B7D8BD;
+}
+
+.cell span {
+	display: block;
+	transform: translateY(60%);
+}
+
+.small_cell span {
+	display: block;
+	transform: translateY(50%);
+}
+
+#panel {
+	width:100%;
+	background-color: #FFF6ED;
+	min-height:1000px;
+	color:white;
+	font-weight: bold;
+	padding:5px;
+	font-family: Arial;
+}
