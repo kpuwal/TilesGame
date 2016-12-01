@@ -21,7 +21,7 @@ header span {
 	width:1024px;
 	margin-left: auto;
 	margin-right: auto;
-	min-height:380px;
+	min-height:300px;
 }
 
 .grid-container {
@@ -138,8 +138,8 @@ header span {
 #panel {
 	width:100%;
 	background-color: #FFF6ED;
-	min-height:1000px;
-	color:white;
+	min-height:250px;
+	color:#E88676;
 	font-weight: bold;
 	padding:5px;
 	font-family: Arial;
