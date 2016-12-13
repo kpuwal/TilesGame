@@ -1,21 +1,38 @@
 /*
-	Developed by Arnaldo Perez Castano
+	Lightly based on Arnaldo Perez Castano
 	arnaldo.skywalker@gmail.com
 */
 
-var emptytilePosRow = 1;
-var emptytilePosCol = 2;
+var currentStatus = new Array();
+var dataPositionArray = ['0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2'];
 
-console.log(emptytilePosCol);
-console.log(emptytilePosRow);
+window.onload = updateStatus();
+
+function updateStatus(){
+
+	var spans = document.getElementsByClassName("cell");
+
+	for(i=0;i<spans.length;i++)
+	{
+		currentStatus.push(spans[i].textContent);
+	}
+}
+
+var pos = document.getElementById('empty').getAttribute('data-pos');
+var emptytilePosRow = parseInt(pos.split(',')[0]);
+var emptytilePosCol = parseInt(pos.split(',')[1]);
+
+var tilePosition = [emptytilePosRow, emptytilePosCol];
 
 var cellDisplacement = "84px";
+
 
 $(".start .cell").click(moveTile);
 
 function moveTile() {
-	// Gets the position of the current element
+
 	var pos = $(this).attr('data-pos');
+
 	var posRow = parseInt(pos.split(',')[0]);
 	var posCol = parseInt(pos.split(',')[1]);
 
@@ -23,91 +40,108 @@ function moveTile() {
 	if (posRow + 1 == emptytilePosRow && posCol == emptytilePosCol)
 	{
 		$(this).animate({
-		'top' : "+=" + cellDisplacement //moves up
+		'top' : "+=" + cellDisplacement
 		});
 
 		$('#empty').animate({
-		'top' : "-=" + cellDisplacement //moves down
+		'top' : "-=" + cellDisplacement
 		});
 
 		emptytilePosRow-=1;
+
 		$(this).attr('data-pos',(posRow+1) + "," + posCol);
+
+		for(var i=0; i<dataPositionArray.length; i++){
+			if(dataPositionArray[i] == pos){
+				var temp = currentStatus[i];
+				currentStatus[i] = "";
+				currentStatus[i+3] = temp;
+			}
+		}
+		currentStatus = currentStatus;
+
+		tilePosition = pos;
+		console.log('new current status: ' + currentStatus);
+
 	}
 
 	// Move Down
 	if (posRow - 1 == emptytilePosRow && posCol == emptytilePosCol)
 	{
 		$(this).animate({
-		'top' : "-=" + cellDisplacement //moves down
+		'top' : "-=" + cellDisplacement
 		});
 
 		$('#empty').animate({
-		'top' : "+=" + cellDisplacement //moves up
+		'top' : "+=" + cellDisplacement
 		});
 
 		emptytilePosRow+=1;
 		$(this).attr('data-pos',(posRow-1) + "," + posCol);
+
+		for(var i=0; i<dataPositionArray.length; i++){
+			if(dataPositionArray[i] == pos){
+				var temp = currentStatus[i];
+				currentStatus[i] = "";
+				currentStatus[i-3] = temp;
+			}
+		}
+		currentStatus = currentStatus;
+		tilePosition = pos;
+		console.log('new current status: ' + currentStatus);
 	}
 
 	// Move Left
 	if (posRow == emptytilePosRow && posCol + 1 == emptytilePosCol)
 	{
 		$(this).animate({
-		'right' : "-=" + cellDisplacement //moves right
+		'right' : "-=" + cellDisplacement
 		});
 
 		$('#empty').animate({
-		'right' : "+=" + cellDisplacement //moves left
+		'right' : "+=" + cellDisplacement
 		});
 
 		emptytilePosCol -= 1;
 		$(this).attr('data-pos',posRow + "," + (posCol+1));
+
+		for(var i=0; i<dataPositionArray.length; i++){
+			if(dataPositionArray[i] == pos){
+				var temp = currentStatus[i];
+				currentStatus[i] = "";
+				currentStatus[i+1] = temp;
+			}
+		}
+		currentStatus = currentStatus;
+		tilePosition = pos;
+		console.log('new current status: ' + currentStatus);
 	}
 
 	// Move Right
 	if (posRow == emptytilePosRow && posCol - 1 == emptytilePosCol)
 	{
 		$(this).animate({
-		'right' : "+=" + cellDisplacement //moves left
+		'right' : "+=" + cellDisplacement
 		});
 
 		$('#empty').animate({
-		'right' : "-=" + cellDisplacement //moves right
+		'right' : "-=" + cellDisplacement
 		});
 
 		emptytilePosCol += 1;
 		$(this).attr('data-pos',posRow + "," + (posCol-1));
+		for(var i=0; i<dataPositionArray.length; i++){
+			if(dataPositionArray[i] == pos){
+				var temp = currentStatus[i];
+				currentStatus[i] = "";
+				currentStatus[i-1] = temp;
+			}
+		}
+		currentStatus = currentStatus;
+		tilePosition = pos;
+		console.log('new current status: ' + currentStatus);
 	}
 
-	// Update empty position
 	$('#empty').attr('data-pos',emptytilePosRow + "," + emptytilePosCol);
-}
 
-
-
-var step = 0
-var solution = " "
-
-function showSteps() {
-
-	var move = ''
-
-	switch(solution[step]) {
-			case "R":
-				move =  (emptytilePosRow).toString() + ',' + (emptytilePosCol + 1).toString()
-				break
-			case "L":
-				move =  (emptytilePosRow).toString() + ',' + (emptytilePosCol - 1).toString()
-				break
-			case "U":
-				move =  (emptytilePosRow - 1).toString() + ',' + (emptytilePosCol).toString()
-				break
-			case "D":
-				move =  (emptytilePosRow + 1).toString() + ',' + (emptytilePosCol).toString()
-				break
-	}
-
-	$("div[data-pos='" + move + "']").click()
-	panel.innerHTML += 'Step: ' + step + ' -> ' + solution[step] + ' ,'
-	step++
 }
