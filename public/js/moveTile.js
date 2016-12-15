@@ -1,5 +1,5 @@
 /*
-	Lightly based on Arnaldo Perez Castano
+	Based on Arnaldo Perez Castano
 	arnaldo.skywalker@gmail.com
 */
 
@@ -22,7 +22,7 @@ var pos = document.getElementById('empty').getAttribute('data-pos');
 var emptytilePosRow = parseInt(pos.split(',')[0]);
 var emptytilePosCol = parseInt(pos.split(',')[1]);
 
-var tilePosition = [emptytilePosRow, emptytilePosCol];
+// var tilePosition = [emptytilePosRow, emptytilePosCol];
 
 var cellDisplacement = "84px";
 

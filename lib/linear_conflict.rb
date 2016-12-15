@@ -1,5 +1,6 @@
 module LinearConflict
-  def linear_conflict(node)
+
+  def linearConflict(node)
     result = 0
     state = node.state
 

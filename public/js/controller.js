@@ -25,10 +25,10 @@ function loadSolution() {
   }, 2700);
 
   setTimeout(function(){
-    var solution = document.getElementById('dummy').value;
+    var solution = document.getElementById('solved').value;
     console.log('path: ' + solution);
     document.getElementById('show_solution').style.visibility = 'visible';
-    
+
 
     $("#show_solution").click(function() {
       document.addEventListener("DOMContentLoaded", function(event) {
@@ -39,33 +39,6 @@ function loadSolution() {
 }
 
 
-var step = 0
-var solution = ''
-
-function showSolution() {
-  var solution = document.getElementById('dummy').value;
-
-  document.getElementById("show_solution").value="Next Step";
-
-  switch(solution[step]){
-    case "R":
-      move =  (emptytilePosRow).toString() + ',' + (emptytilePosCol + 1).toString()
-      break
-    case "L":
-      move =  (emptytilePosRow).toString() + ',' + (emptytilePosCol - 1).toString()
-      break
-    case "U":
-      move =  (emptytilePosRow - 1).toString() + ',' + (emptytilePosCol).toString()
-      break
-    case "D":
-      move =  (emptytilePosRow + 1).toString() + ',' + (emptytilePosCol).toString()
-      break
-  }
-
-  $("div[data-pos='" + move + "']").click()
-  step_panel.innerHTML += 'Step: ' + step + ' -> ' + solution[step] + ' ,'
-  step++
-}
 
 
 // functions:

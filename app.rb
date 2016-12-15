@@ -2,19 +2,10 @@ require 'sinatra'
 require_relative './lib/node'
 require_relative './lib/astar'
 require_relative './lib/expand_node'
+require_relative './lib/app_helper'
 
-class TilesPuzzleApp < Sinatra::Base
+class TilesGame < Sinatra::Base
   enable :sessions
-
-  def solving_puzzle
-    @status = @status.each_slice(3).to_a
-    p init = Node.new(0, @status, @emptyRow, @emptyCol, 0)
-
-    goal = Node.new(0, [[1,2,3],[4,5,6],[7,8,0]], 2, 2, 0)
-    astar = Astar.new(init, goal)
-    astar.queue
-    p @solved = astar.execute
-  end
 
   get '/' do
     @status = [7,2,5,6,4,0,8,3,1]
@@ -37,7 +28,8 @@ class TilesPuzzleApp < Sinatra::Base
 
   get '/solution' do
     @solution = session[:solution]
-    erb :test
+    erb :solution
   end
+
   run! if app_file == $0
 end

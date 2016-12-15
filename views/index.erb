@@ -13,26 +13,28 @@
     <header><h2>TilesPuzzle <span>with the</span> A*<span>algorithm</span></h2></header>
 	  <div class="container">
 		  <div class="grid-container">
-		    <div class="grid start">
+
+        <div class="grid start">
 
           <div class="row">
-				    <div class="cell red" data-pos="0,0"><span><%= @status[0] %></span></div>
+				    <div class="cell" data-pos="0,0"><span><%= @status[0] %></span></div>
 				    <div class="cell red" data-pos="0,1"><span><%= @status[1] %></span></div>
 				    <div class="cell" data-pos="0,2"><span><%= @status[2] %></span></div>
 			    </div>
 
 			    <div class="row">
 				    <div class="cell yellow" data-pos="1,0"><span><%= @status[3] %></span></div>
-				    <div class="cell" data-pos="1,1"><span><%= @status[4] %></span></div>
+				    <div class="cell yellow" data-pos="1,1"><span><%= @status[4] %></span></div>
             <div class="cell empty" id="empty" data-pos="1,2"></div>
 			    </div>
 
           <div class="row">
-				    <div class="cell" data-pos="2,0"><span><%= @status[6] %></span></div>
-				    <div class="cell yellow" data-pos="2,1"><span><%= @status[7] %></span></div>
+				    <div class="cell red" data-pos="2,0"><span><%= @status[6] %></span></div>
+				    <div class="cell" data-pos="2,1"><span><%= @status[7] %></span></div>
 				    <div class="cell" data-pos="2,2"><span><%= @status[8] %></span></div>
 			    </div>
 		    </div>
+
 	    </div>
 
 		  <div class="grid-container">
@@ -58,13 +60,18 @@
 			    </div>
 		    </div>
 		  </div>
-	  </div>
+    </div>
+
+    <div id="solution_panel"><button id="solve_it" onclick="loadSolution()">Solve</button></div>
+    <div class="display">
+      <input id="show_solution" type="button" value='Show Steps' onclick="showSolution()"></input>
+      <div id="step_panel"></div>
+    </div>
   </div>
-  <div id="solution_panel"><button id="solve_it" onclick="loadSolution()">Solve</button></div>
-  <input id="show_solution" type="button" value='Show Steps' onclick="showSolution()"></input><div id="step_panel"></div>
 
 	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/tilespuzzle.js"></script>
-  <script type="text/javascript" src="js/test.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
+  <script type="text/javascript" src="js/moveTile.js"></script>
+  <script type="text/javascript" src="js/showSolution.js"></script>
 </body>
 </html>
