@@ -4,7 +4,6 @@
 */
 
 var currentStatus = new Array();
-var dataPositionArray = ['0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2'];
 
 window.onload = updateStatus();
 
@@ -22,14 +21,13 @@ var pos = document.getElementById('empty').getAttribute('data-pos');
 var emptytilePosRow = parseInt(pos.split(',')[0]);
 var emptytilePosCol = parseInt(pos.split(',')[1]);
 
-// var tilePosition = [emptytilePosRow, emptytilePosCol];
-
 var cellDisplacement = "84px";
 
 
 $(".start .cell").click(moveTile);
 
 function moveTile() {
+	var dataPositionArray = ['0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2'];
 
 	var pos = $(this).attr('data-pos');
 
