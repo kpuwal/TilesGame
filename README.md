@@ -1,3 +1,11 @@
+## Sliding Tiles Puzzle with A* algorithm
+
+<img width="846" alt="screen shot 2017-01-11 at 23 51 56" src="https://cloud.githubusercontent.com/assets/8964199/21915508/339dbed6-d932-11e6-99d4-f01e719a0213.png">
+
+The purpose of the puzzle is to rearrange the initial configuration of the tiles to match another configuration known as the goal configuration. The rearrangement task is achieved by swapping the empty tile with some other tile in all possible directions (up, down, left, and right).
+
+## Pseudocode
+
 A* algorithm
 
 initialize the open list
@@ -22,3 +30,27 @@ while the open list is not empty
    end
    push q on the closed list
 end
+
+## Motivation
+
+A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+
+## Installation
+
+
+
+## API Reference
+
+Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+
+## Tests
+
+Describe and show how to run the tests with code examples.
+
+## Contributors
+
+Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
+
+## License
+
+A short snippet describing the license (MIT, Apache, etc.)
