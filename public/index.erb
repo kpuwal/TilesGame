@@ -23,13 +23,13 @@
 			    </div>
 
 			    <div class="row">
-				    <div class="cell yellow" data-pos="1,0"><span><%= @status[3] %></span></div>
-				    <div class="cell yellow" data-pos="1,1"><span><%= @status[4] %></span></div>
-            <div class="cell empty" id="empty" data-pos="1,2"></div>
+				    <div class="cell" data-pos="1,0"><span><%= @status[3] %></span></div>
+				    <div class="cell" data-pos="1,1"><span><%= @status[4] %></span></div>
+            <div class="cell" id="empty" data-pos="1,2"></div>
 			    </div>
 
           <div class="row">
-				    <div class="cell red" data-pos="2,0"><span><%= @status[6] %></span></div>
+				    <div class="cell" data-pos="2,0"><span><%= @status[6] %></span></div>
 				    <div class="cell" data-pos="2,1"><span><%= @status[7] %></span></div>
 				    <div class="cell" data-pos="2,2"><span><%= @status[8] %></span></div>
 			    </div>
@@ -59,19 +59,29 @@
 				    <div class="small_cell"></div>
 			    </div>
 		    </div>
+        <div class="heuristics">
+          <h2>Choose heuristics:</h2>
+          <input id="misplaced" type="radio" name="misplaced" value="true">
+          <label for="option"><span><span>Misplaced Tiles</span></span></label></br>
+          <input id="manhattan" type="radio" name="manhattan" value="true">
+          <label for="option"><span><span>Manhattan Distance</span></span></label>
+        </div>
 		  </div>
     </div>
 
-    <div id="solution_panel"><button id="solve_it" onclick="loadSolution()">Solve</button></div>
+    <div id="solution_panel">
+      <button id="solve_it" onclick="loadSolution()">Solve</button>
+    </div>
     <div class="display">
       <input id="show_solution" type="button" value='Show Steps' onclick="showSolution()"></input>
       <div id="step_panel"></div>
     </div>
   </div>
 
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/controller.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/moveTile.js"></script>
   <script type="text/javascript" src="js/showSolution.js"></script>
+  <script type="text/javascript" src="js/heuristics.js"></script>
 </body>
 </html>

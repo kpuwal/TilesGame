@@ -4,15 +4,13 @@
 */
 
 var currentStatus = new Array();
+var manhattan, misplaced;
 
-window.onload = updateStatus();
+// window.onload = updateStatus();
 
-function updateStatus(){
-
+window.onload = function updateStatus(){
 	var spans = document.getElementsByClassName("cell");
-
-	for(i=0;i<spans.length;i++)
-	{
+	for(i=0;i<spans.length;i++) {
 		currentStatus.push(spans[i].textContent);
 	}
 }
@@ -20,9 +18,7 @@ function updateStatus(){
 var pos = document.getElementById('empty').getAttribute('data-pos');
 var emptytilePosRow = parseInt(pos.split(',')[0]);
 var emptytilePosCol = parseInt(pos.split(',')[1]);
-
 var cellDisplacement = "84px";
-
 
 $(".start .cell").click(moveTile);
 

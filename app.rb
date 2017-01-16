@@ -6,6 +6,7 @@ require_relative './lib/app_helper'
 
 class TilesGame < Sinatra::Base
   enable :sessions
+  set :views, settings.root + '/public'
 
   get '/' do
     @status = [7,2,5,6,4,0,8,3,1]
@@ -20,7 +21,7 @@ class TilesGame < Sinatra::Base
     @emptyCol = params[:emptyCol].to_i
 
     solving_puzzle
-    
+
     session[:solution] = @solved.path
     p "time: #{Time.now - start}"
   end

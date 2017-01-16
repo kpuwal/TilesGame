@@ -1,16 +1,14 @@
-
-// window.onload = updateStatus();
-
 $("#solve_it").click(function(){
+  radioCheck();
     $.post("/state",
     {
-        status: currentStatus,
-        emptyRow: emptytilePosRow,
-        emptyCol: emptytilePosCol
+      status: currentStatus,
+      emptyRow: emptytilePosRow,
+      emptyCol: emptytilePosCol,
+      manhattan: false,
+      misplaced: false
     });
 });
-
-
 
 function loadSolution() {
   var xhttp = new XMLHttpRequest();
@@ -31,7 +29,6 @@ function loadSolution() {
     console.log('path: ' + solution);
     document.getElementById('show_solution').style.visibility = 'visible';
 
-
     $("#show_solution").click(function() {
       document.addEventListener("DOMContentLoaded", function(event) {
         showSolution();
@@ -39,13 +36,3 @@ function loadSolution() {
     });
   }, 3000);
 }
-
-
-
-
-// functions:
-// loadSolution()
-// showSolution()
-
-// click events ajax
-// controller
