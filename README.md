@@ -1,4 +1,4 @@
-<img width="846" alt="screen shot 2017-01-11 at 23 51 56" src="https://cloud.githubusercontent.com/assets/8964199/21915508/339dbed6-d932-11e6-99d4-f01e719a0213.png">
+<img width="846" alt="screenshot" src="views/img/screenshot.png">
 
 The purpose of the puzzle is to rearrange the initial configuration of the tiles to match another configuration known as the goal configuration. The rearrangement task is achieved by swapping the empty tile with some other tile in all possible directions (up, down, left, and right).
 
