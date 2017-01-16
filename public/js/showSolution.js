@@ -1,11 +1,8 @@
-
-
 var step = 0
 var solution = ''
 
 function showSolution() {
   var solution = document.getElementById('solved').value;
-
   document.getElementById("show_solution").value="Next Step";
   var move = ''
   switch(solution[step]){

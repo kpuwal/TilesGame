@@ -1,5 +1,4 @@
 class Node
-
   attr_accessor :strRepresentation, :path, :state, :value, :emptyRow, :emptyCol, :depth
 
   def initialize(value, state, emptyRow, emptyCol, depth)
@@ -15,5 +14,4 @@ class Node
   def stringRepresentation
     @stringRepresentation = @state.flatten.join(",")
   end
-
 end

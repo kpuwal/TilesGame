@@ -15,13 +15,12 @@ class TilesGame < Sinatra::Base
 
   post '/state' do
     start = Time.now
-
     @status = params[:status].map!{ |s| s.to_i }
     @emptyRow = params[:emptyRow].to_i
     @emptyCol = params[:emptyCol].to_i
 
     solving_puzzle
-
+    
     session[:solution] = @solved.path
     p "time: #{Time.now - start}"
   end

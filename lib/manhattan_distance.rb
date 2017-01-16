@@ -10,13 +10,11 @@ module ManhattanDistance
 
         for h in 0..2 do
           for k in 0..2 do
-
             if goal[h][k] == element
               result += (h - i).abs + (j - k).abs
               found = true
               break
             end
-            
           end
           break if found
         end

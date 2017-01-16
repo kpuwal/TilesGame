@@ -1,4 +1,3 @@
-
 require_relative 'misplaced_tiles'
 require_relative 'manhattan_distance'
 require_relative 'astar'
@@ -6,11 +5,8 @@ require_relative 'node'
 require_relative 'deep_clone'
 
 class ExpandNode
-
-  # extend MisplacedTiles
-  extend ManhattanDistance
-
-  attr_accessor :visited, :queue, :stringRepresentation
+  extend ManhattanDistance, MisplacedTiles
+  attr_accessor :visited, :queue
 
   def initialize(node)
     @newState = node.state
@@ -21,9 +17,7 @@ class ExpandNode
     @path = node.path
   end
 
-
   def movesEmptyNode(visited, queue)
-
     if @row > 0
       stateUp = @newState.deep_clone
       state = tileSwap(stateUp, @row - 1, @column)
@@ -67,7 +61,6 @@ class ExpandNode
         newNode.path = @path + "R"
       end
     end
-
   end
 
   private
@@ -84,5 +77,4 @@ class ExpandNode
     queue.push(newNode)
     visited.add(newNode.stringRepresentation)
   end
-
 end

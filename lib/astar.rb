@@ -2,7 +2,7 @@ require 'pqueue'
 require 'set'
 
 class Astar
-  attr_accessor :stringRepresentation, :visited, :queue, :path
+  attr_accessor :visited, :queue
 
   def initialize(initial, goal)
     @initial = initial
@@ -15,7 +15,6 @@ class Astar
     @visited.add([@initial.stringRepresentation])
     while @queue.length > 0
       current = @queue.pop
-
       if current.stringRepresentation === @goal.stringRepresentation
         return current
       else

@@ -2,7 +2,7 @@
 
 The purpose of the puzzle is to rearrange the initial configuration of the tiles to match another configuration known as the goal configuration. The rearrangement task is achieved by swapping the empty tile with some other tile in all possible directions (up, down, left, and right).
 
-## Pseudocode
+## Pseudo-Code
 
 A* algorithm
 
