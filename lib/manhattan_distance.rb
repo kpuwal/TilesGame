@@ -1,5 +1,5 @@
 module ManhattanDistance
-  def ManhattanDistance.heuristics(node)
+  def ManhattanDistance.heuristic(node)
     result = 0
     goal = [[1,2,3],[4,5,6],[7,8,0]]
 

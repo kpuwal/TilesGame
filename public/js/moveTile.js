@@ -4,8 +4,7 @@
 */
 
 var currentStatus = new Array();
-var manhattan, misplaced;
-
+var manhattan = false;
 // window.onload = updateStatus();
 
 window.onload = function updateStatus(){

@@ -6,7 +6,7 @@ require_relative 'deep_clone'
 
 class ExpandNode
   extend ManhattanDistance, MisplacedTiles
-  attr_accessor :visited, :queue
+  attr_accessor :visited, :queue, :manhattan
 
   def initialize(node)
     @newState = node.state
@@ -17,14 +17,14 @@ class ExpandNode
     @path = node.path
   end
 
-  def movesEmptyNode(visited, queue)
+  def movesEmptyNode(visited, queue, manhattan)
     if @row > 0
       stateUp = @newState.deep_clone
       state = tileSwap(stateUp, @row - 1, @column)
       newNode = Node.new(0, state, @row - 1, @column,  @depth + 1)
 
       if !visited.include?(newNode.stringRepresentation)
-        update(newNode, visited, queue)
+        update(newNode, visited, queue, manhattan)
         newNode.path = @path + "U"
       end
     end
@@ -35,7 +35,7 @@ class ExpandNode
       newNode = Node.new(0, state, @row + 1, @column,  @depth + 1)
 
       if !visited.include?(newNode.stringRepresentation)
-        update(newNode, visited, queue)
+        update(newNode, visited, queue, manhattan)
         newNode.path = @path + "D"
       end
     end
@@ -46,7 +46,7 @@ class ExpandNode
       newNode = Node.new(0, state, @row, @column - 1,  @depth + 1)
 
       if !visited.include?(newNode.stringRepresentation)
-        update(newNode, visited, queue)
+        update(newNode, visited, queue, manhattan)
         newNode.path = @path + "L"
       end
     end
@@ -57,7 +57,7 @@ class ExpandNode
       newNode = Node.new(0, state, @row, @column + 1,  @depth + 1)
 
       if !visited.include?(newNode.stringRepresentation)
-        update(newNode, visited, queue)
+        update(newNode, visited, queue, manhattan)
         newNode.path = @path + "R"
       end
     end
@@ -72,8 +72,12 @@ class ExpandNode
     return state
   end
 
-  def update(newNode, visited, queue)
-    newNode.value = newNode.depth + ManhattanDistance.heuristics(newNode)
+  def update(newNode, visited, queue, manhattan)
+    if manhattan
+      newNode.value = newNode.depth + ManhattanDistance.heuristic(newNode)
+    else
+      newNode.value = newNode.depth + MisplacedTiles.heuristic(newNode)
+    end
     queue.push(newNode)
     visited.add(newNode.stringRepresentation)
   end

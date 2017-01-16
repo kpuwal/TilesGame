@@ -19,9 +19,9 @@ class TilesGame < Sinatra::Base
     @status = params[:status].map!{ |s| s.to_i }
     @emptyRow = params[:emptyRow].to_i
     @emptyCol = params[:emptyCol].to_i
-
+    @manhattan = params[:manhattan]
     solving_puzzle
-
+    p @solved
     session[:solution] = @solved.path
     p "time: #{Time.now - start}"
   end

@@ -1,10 +1,12 @@
-function radioCheck() {
+var time;
+
+function checkRadioButtons() {
   if(document.getElementById('manhattan').checked) {
     manhattan = true;
-    console.log(manhattan);
+    time = 3000;
   }else if(document.getElementById('misplaced').checked) {
-    misplaced = true;
-    console.log(misplaced);
+    manhattan = false;
+    time = 5000;
   } else {
     alert("Choose heuristic first, please");
   }
