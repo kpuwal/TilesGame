@@ -5,7 +5,8 @@
 
 var currentStatus = new Array();
 var manhattan = false;
-// window.onload = updateStatus();
+var step = 0
+var solution = ''
 
 window.onload = function updateStatus(){
 	var spans = document.getElementsByClassName("cell");
@@ -23,28 +24,17 @@ $(".start .cell").click(moveTile);
 
 function moveTile() {
 	var dataPositionArray = ['0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2'];
-
 	var pos = $(this).attr('data-pos');
-
 	var posRow = parseInt(pos.split(',')[0]);
 	var posCol = parseInt(pos.split(',')[1]);
 
-	// Move Up
-	if (posRow + 1 == emptytilePosRow && posCol == emptytilePosCol)
-	{
-		$(this).animate({
-		'top' : "+=" + cellDisplacement
-		});
-
-		$('#empty').animate({
-		'top' : "-=" + cellDisplacement
-		});
-
+	if (posRow + 1 == emptytilePosRow && posCol == emptytilePosCol) {
+		$(this).animate({ 'top' : "+=" + cellDisplacement });
+		$('#empty').animate({ 'top' : "-=" + cellDisplacement });
 		emptytilePosRow-=1;
-
 		$(this).attr('data-pos',(posRow+1) + "," + posCol);
 
-		for(var i=0; i<dataPositionArray.length; i++){
+		for(var i=0; i<dataPositionArray.length; i++) {
 			if(dataPositionArray[i] == pos){
 				var temp = currentStatus[i];
 				currentStatus[i] = "";
@@ -52,27 +42,16 @@ function moveTile() {
 			}
 		}
 		currentStatus = currentStatus;
-
 		tilePosition = pos;
-		console.log('new current status: ' + currentStatus);
-
 	}
 
-	// Move Down
-	if (posRow - 1 == emptytilePosRow && posCol == emptytilePosCol)
-	{
-		$(this).animate({
-		'top' : "-=" + cellDisplacement
-		});
-
-		$('#empty').animate({
-		'top' : "+=" + cellDisplacement
-		});
-
+	if (posRow - 1 == emptytilePosRow && posCol == emptytilePosCol) {
+		$(this).animate({ 'top' : "-=" + cellDisplacement });
+		$('#empty').animate({ 'top' : "+=" + cellDisplacement });
 		emptytilePosRow+=1;
 		$(this).attr('data-pos',(posRow-1) + "," + posCol);
 
-		for(var i=0; i<dataPositionArray.length; i++){
+		for(var i=0; i<dataPositionArray.length; i++) {
 			if(dataPositionArray[i] == pos){
 				var temp = currentStatus[i];
 				currentStatus[i] = "";
@@ -81,24 +60,15 @@ function moveTile() {
 		}
 		currentStatus = currentStatus;
 		tilePosition = pos;
-		console.log('new current status: ' + currentStatus);
 	}
 
-	// Move Left
-	if (posRow == emptytilePosRow && posCol + 1 == emptytilePosCol)
-	{
-		$(this).animate({
-		'right' : "-=" + cellDisplacement
-		});
-
-		$('#empty').animate({
-		'right' : "+=" + cellDisplacement
-		});
-
+	if (posRow == emptytilePosRow && posCol + 1 == emptytilePosCol) {
+		$(this).animate({ 'right' : "-=" + cellDisplacement });
+		$('#empty').animate({ 'right' : "+=" + cellDisplacement });
 		emptytilePosCol -= 1;
 		$(this).attr('data-pos',posRow + "," + (posCol+1));
 
-		for(var i=0; i<dataPositionArray.length; i++){
+		for(var i=0; i<dataPositionArray.length; i++) {
 			if(dataPositionArray[i] == pos){
 				var temp = currentStatus[i];
 				currentStatus[i] = "";
@@ -107,22 +77,14 @@ function moveTile() {
 		}
 		currentStatus = currentStatus;
 		tilePosition = pos;
-		console.log('new current status: ' + currentStatus);
 	}
 
-	// Move Right
-	if (posRow == emptytilePosRow && posCol - 1 == emptytilePosCol)
-	{
-		$(this).animate({
-		'right' : "+=" + cellDisplacement
-		});
-
-		$('#empty').animate({
-		'right' : "-=" + cellDisplacement
-		});
-
+	if (posRow == emptytilePosRow && posCol - 1 == emptytilePosCol) {
+		$(this).animate({ 'right' : "+=" + cellDisplacement });
+		$('#empty').animate({ 'right' : "-=" + cellDisplacement });
 		emptytilePosCol += 1;
 		$(this).attr('data-pos',posRow + "," + (posCol-1));
+
 		for(var i=0; i<dataPositionArray.length; i++){
 			if(dataPositionArray[i] == pos){
 				var temp = currentStatus[i];
@@ -132,9 +94,6 @@ function moveTile() {
 		}
 		currentStatus = currentStatus;
 		tilePosition = pos;
-		console.log('new current status: ' + currentStatus);
 	}
-
 	$('#empty').attr('data-pos',emptytilePosRow + "," + emptytilePosCol);
-
 }

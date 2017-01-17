@@ -1,6 +1,3 @@
-var step = 0
-var solution = ''
-
 function showSolution() {
   var solution = document.getElementById('solved').value;
   document.getElementById("show_solution").value="Next Step";
@@ -8,7 +5,6 @@ function showSolution() {
   switch(solution[step]){
     case "R":
       move =  (emptytilePosRow).toString() + ',' + (emptytilePosCol + 1).toString()
-      // document.getElementById('show_solution').style.color =#fff;
       break
     case "L":
       move =  (emptytilePosRow).toString() + ',' + (emptytilePosCol - 1).toString()

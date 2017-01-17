@@ -9,10 +9,6 @@ def solving_puzzle
 end
 
 def heuristic
-  if @manhattan.to_s == "true"
-    @manhattan = true
-  else
-    @manhattan = false
-  end
+  @manhattan = @manhattan.to_s == "true" ? true : false
   return @manhattan
 end

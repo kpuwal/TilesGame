@@ -22,6 +22,7 @@ class TilesGame < Sinatra::Base
     @manhattan = params[:manhattan]
     solving_puzzle
     p @solved
+    p @manhattan
     session[:solution] = @solved.path
     p "time: #{Time.now - start}"
   end

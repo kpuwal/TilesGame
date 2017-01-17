@@ -7,6 +7,8 @@ describe ExpandNode do
 
   let(:goal_node) { double(value: 18, state: [[7,5,4],[6,2,1],[8,3,0]], emptyRow: 2, emptyCol: 2, depth: 2, stringRepresentation: "7,5,4,6,2,1,8,3,0", path: "DD") }
 
+  let(:heuristic) { double(true) }
+
   let(:visited) { Set.new }
   let(:pqueue) { PQueue.new([initial_node]) { |a,b| a.value < b.value } }
 
@@ -17,13 +19,13 @@ describe ExpandNode do
   describe '#movesEmptyNode' do
     it 'finds all possible neighbour nodes' do
       visited.add(initial_node.stringRepresentation)
-      expand_node.movesEmptyNode(visited, pqueue)
+      expand_node.movesEmptyNode(visited, pqueue, heuristic)
       expect(visited.length).to eq 3
       expect(pqueue.length).to eq 3
     end
 
     it 'finds the node with the smallest value' do
-      new_astar = Astar.new(initial_node, goal_node)
+      new_astar = Astar.new(initial_node, goal_node, heuristic)
       outcome = new_astar.execute
       expect(goal_node.value).to eq outcome.value
     end
@@ -31,12 +33,12 @@ describe ExpandNode do
 
   describe 'Admissable Heuristics' do
     it 'Manhattan Distance heuristic' do
-      manhattan_distance = ManhattanDistance.heuristics(initial_node)
+      manhattan_distance = ManhattanDistance.heuristic(initial_node)
       expect(manhattan_distance).to eq goal_node.value
     end
 
     it 'Misplaced Tiles heuristic' do
-      misplaced_tiles = MisplacedTiles.heuristics(initial_node)
+      misplaced_tiles = MisplacedTiles.heuristic(initial_node)
       expect(misplaced_tiles).to eq 8
     end
   end

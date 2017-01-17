@@ -19,7 +19,7 @@ class Astar
       current = @queue.pop
       @setOfNodes.push(current)
       if current.stringRepresentation === @goal.stringRepresentation
-        p @setOfNodes.length
+        @setOfNodes.length
         @setOfNodes.each {|x| p x.depth}
         return current
       else
