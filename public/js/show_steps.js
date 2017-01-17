@@ -1,4 +1,4 @@
-function showSolution() {
+function showSteps() {
   var solution = document.getElementById('solved').value;
   document.getElementById("show_solution").value="Next Step";
   var move = ''

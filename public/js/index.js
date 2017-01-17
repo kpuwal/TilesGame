@@ -1,7 +1,5 @@
 $("#solve_it").click(function(){
   checkRadioButtons();
-
-  console.log(time);
   $.post("/state", {
     status: currentStatus,
     emptyRow: emptytilePosRow,
@@ -9,7 +7,6 @@ $("#solve_it").click(function(){
     manhattan: manhattan
   });
 });
-
 
 function loadSolution() {
   var xhttp = new XMLHttpRequest();
@@ -35,4 +32,14 @@ function loadSolution() {
       });
     });
   }, 6000);
+}
+
+function checkRadioButtons() {
+  if(document.getElementById('manhattan').checked) {
+    return manhattan = true;
+  } else if(document.getElementById('misplaced').checked) {
+    return manhattan = false;
+  } else {
+    alert("Choose heuristic first, please");
+  }
 }

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <div id='solution'> <%= @solution %> </div>
+  <div id='solution'><span>Path: </span> <%= @solution %> </div>
+  <div class='statistics'>Time:  <span><%= @time %>s </span></div>
+  <div class='statistics'>All visited nodes (closed list):  <span><%= @visited %></span></div>
+  <div class='statistics'>Nodes considered in search (open list):  <span><%= @searched %></span></div>
+  <div class='statistics'>Nodes selected for the path:  <span><%= @path %> </span></div>
   <input type='hidden' value='<%= @solution %>' id='solved'/>
 </html>

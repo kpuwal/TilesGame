@@ -19,12 +19,20 @@ class Astar
       current = @queue.pop
       @setOfNodes.push(current)
       if current.stringRepresentation === @goal.stringRepresentation
-        @setOfNodes.length
-        @setOfNodes.each {|x| p x.depth}
+        p @visited.length
         return current
       else
         ExpandNode.new(current).movesEmptyNode(@visited, @queue, @manhattan)
       end
     end
+  end
+
+  def searched
+    # @setOfNodes.each {|x| p x.depth}
+    return @setOfNodes.length
+  end
+
+  def visited
+    return @visited
   end
 end

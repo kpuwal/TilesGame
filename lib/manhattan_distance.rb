@@ -7,7 +7,6 @@ module ManhattanDistance
       for j in 0..2 do
         element = node.state[i][j]
         found = false
-
         for h in 0..2 do
           for k in 0..2 do
             if goal[h][k] == element

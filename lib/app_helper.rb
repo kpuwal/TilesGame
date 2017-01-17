@@ -6,9 +6,18 @@ def solving_puzzle
   astar = Astar.new(init, goal, @manhattan)
   astar.queue
   @solved = astar.execute
+  @numberOfNodes = astar.searched
 end
 
 def heuristic
   @manhattan = @manhattan.to_s == "true" ? true : false
   return @manhattan
 end
+
+# def visitedNodes
+#   @visited = astar.visited
+# end
+#
+# def stats
+#
+# end

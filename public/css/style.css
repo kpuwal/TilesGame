@@ -6,6 +6,7 @@
 
 body {
 	background-color: #fff;
+	font-family: serif;
 }
 
 header {
@@ -110,8 +111,7 @@ header span {
 }
 
 .cell:hover {
-	background-color: #fff;
-	color: #1d1d1d;
+	background-color: rgba(51,151,251,50);
 }
 
 .cell span {
@@ -137,6 +137,27 @@ header span {
 	display: block;
 }
 
+.statistics {
+	font-weight: normal;
+	font-family: serif;
+	font-size: 11px;
+}
+
+.statistics span {
+	font-weight: bold;
+	font-family: serif;
+}
+
+#solution {
+	margin-bottom: 6px;
+}
+
+#solution span {
+	font-weight: normal;
+	font-family: serif;
+	font-size: 11px;
+}
+
 #step_panel {
 	width:80%;
 	background-color: #FFF;
@@ -147,6 +168,7 @@ header span {
 	padding-top:5px;
 	margin-top: 3px;
 	font-family: Arial;
+	
 	display: block;
 }
 

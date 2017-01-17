@@ -21,14 +21,15 @@ class TilesGame < Sinatra::Base
     @emptyCol = params[:emptyCol].to_i
     @manhattan = params[:manhattan]
     solving_puzzle
-    p @solved
-    p @manhattan
+    session[:time] = Time.now - start
+    session[:searched] = @numberOfNodes
     session[:solution] = @solved.path
-    p "time: #{Time.now - start}"
   end
 
   get '/solution' do
     @solution = session[:solution]
+    @time = session[:time]
+    @searched = session[:searched]
     erb :solution
   end
 
