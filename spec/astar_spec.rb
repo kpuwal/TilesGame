@@ -32,4 +32,30 @@ describe Astar do
       expect(solution.path).to eq goal_node.path
     end
   end
+
+  describe '#visited' do
+    it 'returns length an array of visited nodes -CLOSED LIST' do
+      astar = Astar.new(initial_node, goal_node, heuristic)
+      solution = astar.execute
+      numberOfVisitedNodes = astar.visited
+      expect(numberOfVisitedNodes.length).to eq 2758
+    end
+  end
+
+  describe '#searched' do
+    it 'returns length of an array of nodes considered in search -OPEN LIST' do
+      astar = Astar.new(initial_node, goal_node, heuristic)
+      solution = astar.execute
+      numberOfSearchedNodes = astar.searched
+      expect(numberOfSearchedNodes.length).to eq 1752
+    end
+  end
+
+  describe '#path' do
+    it 'returns array of nodes selected for the path' do
+      astar = Astar.new(initial_node, goal_node, heuristic)
+      solution = astar.execute
+      expect(astar.path).to eq "DLLURRDDLURDLLURULDRURDD"
+    end
+  end
 end

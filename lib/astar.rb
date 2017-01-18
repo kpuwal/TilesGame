@@ -11,6 +11,7 @@ class Astar
     @queue = PQueue.new([initial]){ |a, b| a.value < b.value }
     @manhattan = manhattan
     @setOfNodes = []
+    @pathNodes = ""
   end
 
   def execute
@@ -19,7 +20,7 @@ class Astar
       current = @queue.pop
       @setOfNodes.push(current)
       if current.stringRepresentation === @goal.stringRepresentation
-        p @visited.length
+        @pathNodes = current.path
         return current
       else
         ExpandNode.new(current).movesEmptyNode(@visited, @queue, @manhattan)
@@ -28,11 +29,17 @@ class Astar
   end
 
   def searched
-    # @setOfNodes.each {|x| p x.depth}
-    return @setOfNodes.length
+    return @setOfNodes
   end
 
   def visited
     return @visited
   end
+
+  def path
+    return @pathNodes
+  end
 end
+
+
+# @setOfNodes.each {|x| p x.depth}

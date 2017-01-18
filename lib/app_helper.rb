@@ -6,7 +6,7 @@ def solving_puzzle
   astar = Astar.new(init, goal, @manhattan)
   astar.queue
   @solved = astar.execute
-  @numberOfNodes = astar.searched
+  @stats = displayStats(astar)
 end
 
 def heuristic
@@ -14,10 +14,9 @@ def heuristic
   return @manhattan
 end
 
-# def visitedNodes
-#   @visited = astar.visited
-# end
-#
-# def stats
-#
-# end
+def displayStats(astar)
+  @visited = astar.visited.length
+  @searched = astar.searched.length
+  @path = astar.path.length
+  return [@visited, @searched, @path]
+end
