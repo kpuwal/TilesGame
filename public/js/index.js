@@ -17,18 +17,20 @@ function loadSolution() {
     }
   };
 
-  var refreshIntervalId = setInterval(function() {
+  refreshIntervalId = setInterval(function() {
     xhttp.open("GET", "/solution", true);
     xhttp.send();
-    document.getElementById('show_solution').style.visibility = 'visible';
+    document.getElementById('show_steps').style.visibility = 'visible';
+    document.getElementById('show_graph').style.visibility = 'visible';
+    document.getElementById('start_again').style.visibility = 'visible';
   }, 500);
 
   setTimeout(function(){
     clearInterval(refreshIntervalId);
     var solution = document.getElementById('solved').value;
-    $("#show_solution").click(function() {
+    $("#show_steps").click(function() {
       document.addEventListener("DOMContentLoaded", function(event) {
-        showSolution();
+        showSteps();
       });
     });
   }, 6000);
@@ -42,4 +44,9 @@ function checkRadioButtons() {
   } else {
     alert("Choose heuristic first, please");
   }
+}
+
+function startAgain() {
+    clearInterval(refreshIntervalId);
+    location.reload();
 }

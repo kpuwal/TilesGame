@@ -10,6 +10,8 @@ class TilesGame < Sinatra::Base
 
   get '/' do
     @status = [7,2,5,6,4,0,8,3,1]
+    session[:time] = nil
+    session[:stats] = nil
     session[:solution] = nil
     erb :index
   end

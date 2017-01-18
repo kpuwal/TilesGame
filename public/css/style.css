@@ -163,12 +163,10 @@ header span {
 	background-color: #FFF;
 	height:257px;
 	float: left;
-	color:#1d1d1d;
-	font-weight: bold;
+	color: lightgrey;
 	font-size:9px;
 	padding-top:5px;
 	margin-top: 3px;
-	font-family: Arial;
 	display: block;
 }
 
@@ -197,7 +195,7 @@ header span {
 	margin-left: 50px;
 }
 
-#show_solution {
+#show_steps {
 	background-color:#FFF;
 	border-radius:3px;
 	border:1px solid #1d1d1d;
@@ -209,11 +207,58 @@ header span {
 	font-weight:bold;
 	padding:6px 15px;
 	margin-top: 2%;
+	margin-right: 45px;
 	text-decoration:none;
 	visibility: hidden;
-
 }
-#show_solution:hover {
+
+#show_graph {
+	background-color:#FFF;
+	border-radius:3px;
+	border:1px solid #1d1d1d;
+	display:inline-block;
+	cursor:pointer;
+	color:#1d1d1d;
+	font-family:Krungthep;
+	font-size:11px;
+	font-weight:bold;
+	padding:6px 15px;
+	margin-top: 2%;
+	margin-right: 45px;
+	text-decoration:none;
+	visibility: hidden;
+}
+
+#start_again {
+	background-color:#FFF;
+	border-radius:3px;
+	border:1px solid #1d1d1d;
+	display:inline-block;
+	cursor:pointer;
+	color:#1d1d1d;
+	font-family:Krungthep;
+	font-size:11px;
+	font-weight:bold;
+	padding:6px 15px;
+	margin-top: 2%;
+	margin-right: 45px;
+	text-decoration:none;
+	visibility: hidden;
+}
+
+#start_again:hover {
+	background-color:#1d1d1d;
+	box-shadow: 1px 1px #B7D8BD, 1px 1px #B7D8BD;
+	color: #FFF;
+}
+
+#show_steps:hover {
+	background-color:#1d1d1d;
+	box-shadow: 1px 1px #B7D8BD, 1px 1px #B7D8BD;
+	color: #FFF;
+}
+
+#show_graph:hover {
 	background-color:#1d1d1d;
 	box-shadow: 1px 1px #B7D8BD, 1px 1px #B7D8BD;
 	color: #FFF;

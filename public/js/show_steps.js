@@ -1,6 +1,6 @@
 function showSteps() {
   var solution = document.getElementById('solved').value;
-  document.getElementById("show_solution").value="Next Step";
+  document.getElementById("show_steps").value="Next Step";
   var move = ''
   switch(solution[step]){
     case "R":
