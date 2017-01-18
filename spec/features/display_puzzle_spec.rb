@@ -25,13 +25,31 @@ feature 'Display Puzzle' do
     find_button('Solve').click
   end
 
-  scenario 'displays Generate Graph button', :js => true do
+  scenario 'hides Solve button', :js => true do
     visit('/')
-    find('#show_graph', visible: false)
+    expect(page).to have_content "Solve"
+    click_on('Solve')
+    expect(page).not_to have_content "Solve"
   end
 
-  scenario 'displays Start Again button', :js => true do
+  scenario 'displays/hides Show Steps button', :js => true do
+    visit('/')
+    find('#show_steps', visible: false)
+    click_on('Solve')
+    find('#show_steps', visible: true)
+  end
+
+  scenario 'displays/hides Generate Graph button', :js => true do
+    visit('/')
+    find('#show_graph', visible: false)
+    click_on('Solve')
+    find('#show_graph', visible: true)
+  end
+
+  scenario 'displays/hides Start Again button', :js => true do
     visit('/')
     find('#start_again', visible: false)
+    click_on('Solve')
+    find('#start_again', visible: true)
   end
 end

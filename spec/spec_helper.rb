@@ -9,7 +9,6 @@ require 'capybara/poltergeist'
 # require_relative 'features/web_helpers'
 
 Capybara.javascript_driver = :poltergeist
-Capybara.ignore_hidden_elements = false
 Capybara.app = TilesGame.new
 
 RSpec.configure do |config|

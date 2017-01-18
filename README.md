@@ -31,7 +31,7 @@ end
 
 ## Motivation
 
-Study of search algorithms just for fun.
+Study for fun.
 
 ## Installation
 
