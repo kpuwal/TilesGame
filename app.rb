@@ -21,7 +21,7 @@ class TilesGame < Sinatra::Base
     @emptyCol = params[:emptyCol].to_i
     @manhattan = params[:manhattan]
     solving_puzzle
-    session[:time] = Time.now - start
+    session[:time] = (Time.now - start).round(2)
     session[:stats] = @stats
     session[:solution] = @solved.path
   end

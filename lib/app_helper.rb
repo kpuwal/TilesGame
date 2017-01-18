@@ -14,6 +14,11 @@ def heuristic
   return @manhattan
 end
 
+def visitedNodes(astar)
+  @visited = astar.visited
+  @visitedArray
+end
+
 def displayStats(astar)
   @visited = astar.visited.length
   @searched = astar.searched.length

@@ -159,7 +159,7 @@ header span {
 }
 
 #step_panel {
-	width:100%;
+	width: 60px;
 	background-color: #FFF;
 	min-height:20px;
 	color:#1d1d1d;

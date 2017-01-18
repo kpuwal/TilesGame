@@ -5,8 +5,8 @@
 
 var currentStatus = new Array();
 var manhattan = false;
-var step = 0
-var solution = ''
+var step = 0;
+var solution = '';
 
 window.onload = function updateStatus(){
 	var spans = document.getElementsByClassName("cell");
