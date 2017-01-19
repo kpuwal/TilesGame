@@ -3,10 +3,8 @@ def toBoolean(manhattan)
   return bmanhattan
 end
 
-def clearSesions
-  session[:time] = nil
-  session[:stats] = nil
-  session[:solution] = nil
+def toMatrix(status)
+  status.each_slice(3).to_a
 end
 
 def saveToSession

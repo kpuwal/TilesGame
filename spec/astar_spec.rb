@@ -38,7 +38,7 @@ describe Astar do
       astar = Astar.new(initial_node, goal_node, heuristic)
       solution = astar.execute
       numberOfVisitedNodes = astar.visited
-      expect(numberOfVisitedNodes.length).to eq 2758
+      expect(numberOfVisitedNodes.length).to eq 2757
     end
   end
 
@@ -47,7 +47,7 @@ describe Astar do
       astar = Astar.new(initial_node, goal_node, heuristic)
       solution = astar.execute
       numberOfSearchedNodes = astar.searched
-      expect(numberOfSearchedNodes.length).to eq 1752
+      expect(numberOfSearchedNodes.length).to eq 1751
     end
   end
 

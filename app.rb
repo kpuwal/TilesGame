@@ -4,16 +4,15 @@ require_relative './lib/app_helper'
 
 class TilesGame < Sinatra::Base
   set :views, settings.root + '/public'
-  use Rack::Session::Pool, :expire_after => 259200
+  use Rack::Session::Pool, :expire_after => 8000
 
   get '/' do
     @status = [7,2,5,6,4,0,8,3,1]
-    clearSesions
     erb :index
   end
 
   post '/state' do
-    status = params[:status].map!{ |s| s.to_i }
+    status = toMatrix(params[:status].map!{ |s| s.to_i })
     emptyRow = params[:emptyRow].to_i
     emptyCol = params[:emptyCol].to_i
     manhattan = toBoolean(params[:manhattan])
