@@ -5,33 +5,26 @@ require_relative './lib/expand_node'
 require_relative './lib/app_helper'
 
 class TilesGame < Sinatra::Base
-  enable :sessions
   set :views, settings.root + '/public'
+  enable :sessions
 
   get '/' do
     @status = [7,2,5,6,4,0,8,3,1]
-    session[:time] = nil
-    session[:stats] = nil
-    session[:solution] = nil
+    clearSesions
     erb :index
   end
 
   post '/state' do
-    start = Time.now
     @status = params[:status].map!{ |s| s.to_i }
     @emptyRow = params[:emptyRow].to_i
     @emptyCol = params[:emptyCol].to_i
     @manhattan = params[:manhattan]
-    solving_puzzle
-    session[:time] = (Time.now - start).round(2)
-    session[:stats] = @stats
-    session[:solution] = @solved.path
+    solvePuzzle(@status, @emptyRow, @emptyCol, @manhattan)
+    saveToSession
   end
 
   get '/solution' do
-    @solution = session[:solution]
-    @time = session[:time]
-    @stats = session[:stats]
+    readFromSession
     erb :solution
   end
 

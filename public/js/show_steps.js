@@ -1,6 +1,12 @@
+$("#show_steps").click(function() {
+  document.addEventListener("DOMContentLoaded", function(event) {
+    showSteps();
+  });
+});
+
 function showSteps() {
-  var solution = document.getElementById('solved').value;
   document.getElementById("show_steps").value="Next Step";
+  var solution = document.getElementById('solved').value;
   var move = ''
   switch(solution[step]){
     case "R":

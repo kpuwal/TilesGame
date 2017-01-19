@@ -29,15 +29,15 @@ class Astar
   end
 
   def searched
-    return @setOfNodes
+    @setOfNodes
   end
 
   def visited
-    return @visited
+    @visited
   end
 
   def path
-    return @pathNodes
+    @pathNodes
   end
 end
 
