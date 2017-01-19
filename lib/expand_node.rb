@@ -67,6 +67,8 @@ class ExpandNode
 
   def tileSwap(state, row, column)
     temp = state[row][column]
+    state[row][column]
+    state[@row][@column]
     state[row][column] = 0
     state[@row][@column] = temp
     return state

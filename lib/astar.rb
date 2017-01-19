@@ -15,7 +15,7 @@ class Astar
   end
 
   def execute
-    @visited.add([@initial.stringRepresentation])
+    @visited.add(@initial.stringRepresentation)
     while @queue.length > 0
       current = @queue.pop
       @setOfNodes.push(current)
@@ -29,15 +29,15 @@ class Astar
   end
 
   def searched
-    @setOfNodes
+    return @setOfNodes
   end
 
   def visited
-    @visited
+    return @visited
   end
 
   def path
-    @pathNodes
+    return @pathNodes
   end
 end
 
