@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
   <div id='solution'> <%= @solution %> </div>
-  <div class='statistics'>Time:  <span><%= @time %>s </span></div>
-  <div class='statistics'>All visited nodes (closed list):  <span><%= @stats[0] %></span></div>
-  <div class='statistics'>Nodes considered in search (open list):  <span><%= @stats[1] %></span></div>
-  <div class='statistics'>Nodes selected for the path:  <span><%= @stats[2] %> </span></div>
+  <ul id="statistics">
+    <li>Time:  <span><%= @time %>s </span></li>
+    <li>All visited nodes (closed list):  <span><%= @stats[0] %></span></li>
+    <li>Nodes considered in search (open list):  <span><%= @stats[1] %></span></li>
+    <li>Nodes selected for the path:  <span><%= @stats[2] %> </span></li>
+  </ul>
+
   <input type='hidden' value='<%= @solution %>' id='solved'/>
+  <input type='hidden' value='<%= @visited %>' id='visited'/>
+  <input type='hidden' value='<%= @searched %>' id='searched'/>
 </html>

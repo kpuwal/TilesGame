@@ -23,8 +23,12 @@ class Game
     return [visited, searched, path]
   end
 
-  def visitedNodes
+  def aggregateVisited
     @astar.visited
+  end
+
+  def aggregateSearched
+    @astar.searched.to_s
   end
 
   def self.create(status, emptyRow, emptyCol, manhattan)
@@ -34,5 +38,13 @@ class Game
 
   def self.stats
     @game.aggregateStats
+  end
+
+  def self.visited
+    @game.aggregateVisited
+  end
+
+  def self.searched
+    @game.aggregateSearched
   end
 end

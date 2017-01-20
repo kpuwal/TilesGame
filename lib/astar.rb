@@ -10,15 +10,15 @@ class Astar
     @visited = Set.new
     @queue = PQueue.new([initial]){ |a, b| a.value < b.value }
     @manhattan = manhattan
-    @setOfNodes = []
-    @pathNodes = ""
+    @searchedNodes = []
+    @pathNodes = []
   end
 
   def execute
     @visited.add(@initial.stringRepresentation)
     while @queue.length > 0
       current = @queue.pop
-      @setOfNodes.push(current)
+      @searchedNodes.push([current.depth, current.path, current.stringRepresentation])
       if current.stringRepresentation === @goal.stringRepresentation
         @pathNodes = current.path
         return current
@@ -29,11 +29,11 @@ class Astar
   end
 
   def searched
-    return @setOfNodes
+    return @searchedNodes
   end
 
   def visited
-    return @visited
+    return @visited.to_a
   end
 
   def path

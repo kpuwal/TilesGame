@@ -17,6 +17,7 @@ function loadSolution() {
       document.getElementById('show_steps').style.visibility = 'visible';
       document.getElementById('show_graph').style.visibility = 'visible';
       document.getElementById('start_again').style.visibility = 'visible';
+
     }
   };
 
@@ -27,7 +28,7 @@ function loadSolution() {
 
   setTimeout(function(){
     clearInterval(refreshIntervalId);
-  }, 6000);
+  }, 6000);  
 }
 
 function checkRadioButtons() {
@@ -41,4 +42,9 @@ function checkRadioButtons() {
 function startAgain() {
   clearInterval(refreshIntervalId);
   location.reload();
+}
+
+function readStats() {
+  var stats = document.getElementById('stats').value;
+console.log(stats)
 }
