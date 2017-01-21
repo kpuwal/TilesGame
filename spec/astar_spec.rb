@@ -1,9 +1,10 @@
 require 'astar'
 require 'pqueue'
 require 'set'
+require 'graph_data'
 
 describe Astar do
-  subject(:astar) { described_class.new(initial_node, goal_node, heuristic) }
+  subject(:astar) { described_class.new(initial_node, goal_node, heuristic) { include GraphData }}
 
   let(:initial_node) { double(value: 0, state: [[7,5,0],[6,2,4],[8,3,1]], emptyRow:  0, emptyCol: 2, depth: 0, stringRepresentation: "7,5,0,6,2,4,8,3,1", path: "" ) }
 
@@ -56,6 +57,15 @@ describe Astar do
       astar = Astar.new(initial_node, goal_node, heuristic)
       solution = astar.execute
       expect(astar.path).to eq "DLLURRDDLURDLLURULDRURDD"
+    end
+  end
+
+  describe 'GraphData' do
+    it 'sorts searched array by depth' do
+      astar = Astar.new(initial_node, goal_node, heuristic)
+      solution = astar.execute
+      sortedByDepth = GraphData.sortSearchedByDepth(astar.searched, astar.path)
+      expect(sortedByDepth.length).to eq 66286
     end
   end
 end

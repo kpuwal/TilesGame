@@ -20,7 +20,7 @@ feature 'Display' do
     expect(page).to have_content "Manhattan Distance"
   end
 
-  scenario 'Solve button' do
+  scenario 'visible Solve button' do
     visit('/')
     find_button('Solve').click
   end
