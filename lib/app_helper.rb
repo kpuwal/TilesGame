@@ -21,5 +21,4 @@ def readFromSession
   @stats = session[:stats]
   @visited = session[:visited]
   @searched = session[:searched]
-  p @searched
 end

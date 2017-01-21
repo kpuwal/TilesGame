@@ -9,13 +9,28 @@ function generateGraph() {
   canvas.style.margin = '50px';
   document.body.appendChild(canvas);
   getGraphData();
-
 }
 
 function getGraphData() {
   var visited = document.getElementById('visited').value;
   var searched = document.getElementById('searched').value;
-  var serchedData = JSON.parse(searched);
+  var searchedData = JSON.parse(searched);
   var visitedData = JSON.parse(visited);
-  console.log("hello data")
 }
+
+// function changeTileColorOnHover(obj) {
+//   console.log("blue!!!")
+//   obj.style.backgroundColor="green";
+// }
+
+// $('.cell').mousehover(function(event) {
+  // $(this).css({background:"red"});
+  // $('.button').css({background:"green"}); // reset all buttons' color to default green
+  // $(event.target).css({background:"red"}); // change current button color to red
+// });
+//
+// $(".cell").hover(function() {
+//   $(this).addClass("blue");
+// }, function() {
+//   $(this).removeClass("blue");
+// });

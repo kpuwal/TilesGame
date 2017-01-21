@@ -1,9 +1,10 @@
 require_relative 'node'
 require_relative 'astar'
+require_relative 'graph_data'
 require_relative 'expand_node'
 
 class Game
-  attr_reader :status, :emptyRow, :emptyCol, :manhattan
+  attr_reader :status, :emptyRow, :emptyCol, :manhattan, :searchedNodes, :visited, :path
 
   def initialize(status, emptyRow, emptyCol, manhattan)
     initial = Node.new(0, status, emptyRow, emptyCol, 0)
@@ -18,17 +19,13 @@ class Game
 
   def aggregateStats
     visited = @astar.visited.length
-    searched = @astar.searched.length
-    path = @astar.path.length
-    return [visited, searched, path]
+    searched = @astar.searchedNodes.length
+    @path = @astar.path.length
+    return [visited, searched, @path]
   end
 
-  def aggregateVisited
-    @astar.visited
-  end
-
-  def aggregateSearched
-    @astar.searched.to_s
+  def graphSortedByDepth
+    GraphData.sortSearchedByDepth(@astar.searchedNodes, @path)
   end
 
   def self.create(status, emptyRow, emptyCol, manhattan)
@@ -41,10 +38,10 @@ class Game
   end
 
   def self.visited
-    @game.aggregateVisited
+    @game.visited.to_s
   end
 
   def self.searched
-    @game.aggregateSearched
+    @game.graphSortedByDepth
   end
 end

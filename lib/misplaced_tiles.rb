@@ -1,5 +1,5 @@
 module MisplacedTiles
-  def MisplacedTiles.heuristic(node)
+  def self.heuristic(node)
     result = 0
     goal = [[1,2,3],[4,5,6],[7,8,0]]
 
