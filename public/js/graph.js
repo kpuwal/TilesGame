@@ -1,27 +1,32 @@
 function drawGraph() {
   var sketch = function(graph) {
     var coordinates = canvasSize();
-    var width = coordinates[0];
-    var height = coordinates[1];
+    var width = coordinates[0]*22;
+    var height = coordinates[1]*22;
     var rect_x = 50;
     var rect_y = 12;
 
     graph.setup = function() {
-      graph.createCanvas(width*3+50, height*3);
+      graph.createCanvas(width+50, height);
+      graph.textSize(8);
     };
 
    graph.draw = function() {
      graph.background(255);
-     graph.fill("#1d1d1d");
-     graph.stroke('#1d1d1d');
-     graph.line(50,0,coordinates[1]-50,0);
 
-     graph.stroke('#ffffff');
+     graph.push();
+      graph.translate(50, 20);
+      graph.fill('#1d1d1d');
+      graph.text("depth",-25,8,5,15);
 
-     for (var i=0; i<coordinates[1]; i++) {
-       graph.rect(rect_x+21*i,rect_y,21,21);
-       graph.rect(rect_x+21*i,rect_y,21,21);
-     }
+      for (var i=0; i<coordinates[0]+1; i++) {
+        graph.stroke('#ffffff');
+        graph.rect(21*i,0,21,21);
+        // graph.fill(51,151,251);
+        graph.text(i,10+21*i-2,-15,5,15);
+        graph.fill('#1d1d1d');
+      }
+     graph.pop();
    };
  };
    var myp5 = new p5(sketch, 'graph_canvas');
@@ -31,7 +36,7 @@ function canvasSize() {
   var getStats = document.getElementById('stats').value;
   var stats = JSON.parse(getStats);
   var width = stats[2];
-  var height = (stats[1]/stats[2]);
+  var height = Math.round(stats[1]/stats[2]);
   var coordinates = [width, height];
   return coordinates;
 }
