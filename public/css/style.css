@@ -195,6 +195,7 @@ header span {
 .display {
 	width: 80%;
 	margin-left: 50px;
+	margin-bottom: 30px;
 }
 
 #show_steps {
@@ -264,4 +265,9 @@ header span {
 	background-color:#1d1d1d;
 	box-shadow: 1px 1px #B7D8BD, 1px 1px #B7D8BD;
 	color: #FFF;
+}
+
+#graph_canvas {
+	position:absolute;
+	display: block;
 }
