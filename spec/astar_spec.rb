@@ -11,6 +11,7 @@ describe Astar do
   let(:goal_node) { double(value: 0, state: [[1,2,3],[4,5,6],[7,8,0]], emptyRow: 2, emptyCol: 2, depth: 0, stringRepresentation: "1,2,3,4,5,6,7,8,0", path: "DLLURRDDLURDLLURULDRURDD") }
 
   let(:heuristic) { double(true) }
+  let(:path_length) { 25 }
 
   it 'initializes Astar' do
     expect(astar).to be_an_instance_of Astar
@@ -61,11 +62,11 @@ describe Astar do
   end
 
   describe 'GraphData' do
-    it 'sorts searched array by depth' do
+    it 'formats data to json' do
       astar = Astar.new(initial_node, goal_node, heuristic)
       solution = astar.execute
-      sortedByDepth = GraphData.sortSearchedByDepth(astar.searched, astar.path)
-      expect(sortedByDepth.length).to eq 62810
+      sortedByDepth = GraphData.writeToJson(astar.searched)
+      expect(sortedByDepth.length).to eq path_length
     end
   end
 end
