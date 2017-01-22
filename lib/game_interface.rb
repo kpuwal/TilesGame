@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'node'
 require_relative 'astar'
 require_relative 'graph_data'
@@ -20,12 +21,9 @@ class Game
   def aggregateStats
     visited = @astar.visited.length
     searched = @astar.searched.length
-    @path = @astar.path.length
-    return [visited, searched, @path]
-  end
-
-  def graphSortedByDepth
-    GraphData.sortSearchedByDepth(@astar.searched, @path)
+    path = @astar.path.length
+    writeToTempJsonFile
+    return [visited, searched, path]
   end
 
   def self.create(status, emptyRow, emptyCol, manhattan)
@@ -41,7 +39,12 @@ class Game
     @game.visited.to_s
   end
 
-  def self.searched
-    @game.graphSortedByDepth
+  private
+
+  def writeToTempJsonFile
+    file = GraphData.writeToJson(@astar.searched)
+    File.open("public/temp.json","w") do |f|
+      f.write(JSON.pretty_generate(file))
+    end
   end
 end

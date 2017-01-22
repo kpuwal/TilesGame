@@ -1,14 +1,11 @@
 module GraphData
-  def self.sortSearchedByDepth(searchedArray, steps)
-    orderedByDepth = []
-    sortedByDepth = []
-
-    searchedArray.each{ |x| orderedByDepth << { x[0] => [x[1], x[2]] }}
-    orderedByDepth.group_by(&:keys).each{ |x|
-      sortedByDepth << x[1].inject{ |memo, el|
-        memo.merge( el ){ |k, old_v, new_v| old_v + new_v }
-      }
+  def self.writeToJson(searchedArray)
+    jsonReadyData = {}
+    searchedArray.group_by(&:keys).each { |x|
+      jsonReadyData.merge!(x[1].inject{ |first, element|
+        first.merge(element){ |k, a_val, b_val| a_val.merge b_val }
+      })
     }
-    return sortedByDepth.to_s
+    return jsonReadyData
   end
 end

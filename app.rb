@@ -19,7 +19,7 @@ class TilesGame < Sinatra::Base
 
     start = Time.now
     @game = Game.create(status, emptyRow, emptyCol, manhattan)
-    @time = (Time.now - start).round(2)
+    @time = (Time.now - start).round(4)
     saveToSession
   end
 

@@ -1,9 +1,7 @@
 require 'pqueue'
 require 'set'
-require_relative 'graph_data'
 
 class Astar
-  extend GraphData
   attr_accessor :visited, :queue, :manhattan
   attr_reader :searched, :path
 
@@ -20,7 +18,7 @@ class Astar
     @visited.add(@initial.stringRepresentation)
     while @queue.length > 0
       current = @queue.pop
-      @searched.push([current.depth, current.path, current.stringRepresentation])
+      @searched.push(current.depth => {current.path => current.stringRepresentation})
       if current.stringRepresentation === @goal.stringRepresentation
         @path = current.path
         return current

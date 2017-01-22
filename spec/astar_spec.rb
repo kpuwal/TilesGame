@@ -65,7 +65,7 @@ describe Astar do
       astar = Astar.new(initial_node, goal_node, heuristic)
       solution = astar.execute
       sortedByDepth = GraphData.sortSearchedByDepth(astar.searched, astar.path)
-      expect(sortedByDepth.length).to eq 66286
+      expect(sortedByDepth.length).to eq 62810
     end
   end
 end

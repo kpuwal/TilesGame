@@ -13,9 +13,10 @@ function generateGraph() {
 
 function getGraphData() {
   var visited = document.getElementById('visited').value;
-  var searched = document.getElementById('searched').value;
-  var searchedData = JSON.parse(searched);
+  // var searched = document.getElementById('searched').value;
   var visitedData = JSON.parse(visited);
+  // var searchedData = JSON.parse(searched);
+
 }
 
 // function changeTileColorOnHover(obj) {

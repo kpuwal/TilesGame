@@ -17,7 +17,6 @@ function loadSolution() {
       document.getElementById('show_steps').style.visibility = 'visible';
       document.getElementById('show_graph').style.visibility = 'visible';
       document.getElementById('start_again').style.visibility = 'visible';
-
     }
   };
 
@@ -26,9 +25,7 @@ function loadSolution() {
     xhttp.send();
   }, 1000);
 
-  setTimeout(function(){
-    clearInterval(refreshIntervalId);
-  }, 6000);  
+  setTimeout(function(){ clearInterval(refreshIntervalId) }, 6000);
 }
 
 function checkRadioButtons() {
@@ -46,5 +43,4 @@ function startAgain() {
 
 function readStats() {
   var stats = document.getElementById('stats').value;
-console.log(stats)
 }
