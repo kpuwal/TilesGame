@@ -4,7 +4,7 @@ require_relative './lib/app_helper'
 
 class TilesGame < Sinatra::Base
   set :views, settings.root + '/public'
-  use Rack::Session::Pool, :expire_after => 8000
+  use Rack::Session::Pool, :expire_after => 5000
 
   get '/' do
     @status = [7,2,5,6,4,0,8,3,1]

@@ -26,6 +26,7 @@ header span {
 	padding-top: 3%;
 	width:100%;
 	min-height:300px;
+	min-width: 550px;
 }
 
 .grid-container {
