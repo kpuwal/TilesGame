@@ -12,6 +12,7 @@ def saveToSession
   session[:stats] = Game.stats
   session[:solution] = @game.path
   session[:visited] = Game.visited
+  session[:searched] = Game.searched
 end
 
 def readFromSession
@@ -19,4 +20,5 @@ def readFromSession
   @time = session[:time]
   @stats = session[:stats]
   @visited = session[:visited]
+  @searched = session[:searched]
 end
