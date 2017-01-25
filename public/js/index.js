@@ -25,7 +25,7 @@ function loadSolution() {
     xhttp.send();
   }, 1000);
 
-  setTimeout(function(){ clearInterval(refreshIntervalId) }, 2000);
+  setTimeout(function(){ clearInterval(refreshIntervalId); }, 2000);
 }
 
 function checkRadioButtons() {
