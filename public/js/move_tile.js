@@ -14,7 +14,7 @@ window.onload = function updateStatus(){
 	for(i=0;i<spans.length;i++) {
 		currentStatus.push(spans[i].textContent);
 	}
-}
+};
 
 var pos = document.getElementById('empty').getAttribute('data-pos');
 var emptytilePosRow = parseInt(pos.split(',')[0]);
@@ -52,7 +52,7 @@ function moveTile() {
 		emptytilePosRow+=1;
 		$(this).attr('data-pos',(posRow-1) + "," + posCol);
 
-		for(var i=0; i<dataPositionArray.length; i++) {
+		for (var i=0; i<dataPositionArray.length; i++) {
 			if(dataPositionArray[i] == pos){
 				var temp = currentStatus[i];
 				currentStatus[i] = "";
@@ -69,7 +69,7 @@ function moveTile() {
 		emptytilePosCol -= 1;
 		$(this).attr('data-pos',posRow + "," + (posCol+1));
 
-		for(var i=0; i<dataPositionArray.length; i++) {
+		for (var i=0; i<dataPositionArray.length; i++) {
 			if(dataPositionArray[i] == pos){
 				var temp = currentStatus[i];
 				currentStatus[i] = "";
@@ -86,7 +86,7 @@ function moveTile() {
 		emptytilePosCol += 1;
 		$(this).attr('data-pos',posRow + "," + (posCol-1));
 
-		for(var i=0; i<dataPositionArray.length; i++){
+		for (var i=0; i<dataPositionArray.length; i++){
 			if(dataPositionArray[i] == pos){
 				var temp = currentStatus[i];
 				currentStatus[i] = "";

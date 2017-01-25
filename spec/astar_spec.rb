@@ -65,7 +65,7 @@ describe Astar do
     it 'formats data to json' do
       astar = Astar.new(initial_node, goal_node, heuristic)
       solution = astar.execute
-      sortedByDepth = GraphData.writeToJson(astar.searched)
+      sortedByDepth = GraphData.writeFrom(astar.searched)
       expect(sortedByDepth.length).to eq path_length
     end
   end

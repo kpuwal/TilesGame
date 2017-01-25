@@ -26,7 +26,7 @@ class Game
   end
 
   def searchedData
-    return GraphData.writeInto(@astar.searched)
+    return GraphData.writeFrom(@astar.searched)
   end
 
   def self.create(status, emptyRow, emptyCol, manhattan)

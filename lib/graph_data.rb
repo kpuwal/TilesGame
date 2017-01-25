@@ -1,5 +1,5 @@
 module GraphData
-  def self.writeInto(searchedArray)
+  def self.writeFrom(searchedArray)
     jsonReadyData = {}
     searchedArray.group_by(&:keys).each { |x|
       jsonReadyData.merge!(x[1].inject{ |first, element|
