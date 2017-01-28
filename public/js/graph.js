@@ -1,5 +1,7 @@
-var r = 15;
-var grid;
+var r = 5;
+var grid, node;
+var values = [];
+var keys = [];
 
 function drawGraph() {
   var myp5 = new p5(sketch, 'graph_canvas');
@@ -14,7 +16,7 @@ var sketch = function(graph) {
     graph.stroke('#ffffff');
     graph.fill('#1d1d1d');
     graph.textSize(8);
-    grid = new NodeGrid(1,1);
+    graph.node = new Node(1,1);
   };
 
   graph.draw = function() {
@@ -23,15 +25,15 @@ var sketch = function(graph) {
    graph.translate(50, 20);
    graph.text("depth",-35,-15,5,15);
    graph.text("-->",-12,-15,5,15);
-   grid.addNodes();
+   graph.node.update(1,2);
  };
 
- var Node = function(x,y) {
-   graph.pos_x = x;
-   graph.pos_y = y;
-   graph.ancestor = [];
-   graph.address = [];
- };
+ function Node(x,y,row,col) {
+   this.pos_x = x;
+   this.pos_y = y;
+   this.ancestor = "";
+   this.address = "";
+ }
 
  Node.prototype.render = function(){
    graph.push();
@@ -41,18 +43,18 @@ var sketch = function(graph) {
    graph.pop();
  };
 
- Node.prototype.assignAncestor = function() {
-   // assign ancestor from searched data
+ Node.prototype.assignAncestor = function(row,col) {
+   this.ancestor = keys[row][col-1];
  };
 
- Node.prototype.assignAddress = function() {
-   // assign address from searched data
+ Node.prototype.assignAddress = function(row, col) {
+   this.address = values[row][col];
  };
 
- Node.prototype.update = function() {
-   graph.render();
-   graph.assignAncestor();
-   graph.assignAddress();
+ Node.prototype.update = function(row,col) {
+   this.assignAncestor(row,col);
+   this.assignAddress(row,col);
+   this.render();
  };
 
  var NodeGrid = function(x,y) {
@@ -81,6 +83,7 @@ function canvasWidth() {
 
 function canvasHeight() {
   var data = searchedDataByKeys();
+  searchedDataOrganised();
   return data.sort(function(a, b){ return b-a; })[0];
 }
 
@@ -89,11 +92,6 @@ function searchedData() {
   searched = JSON.parse(searched);
   return searched;
 }
-
-
-//  if(myp5.mouseX-50 > myp5.pos_x && myp5.mouseX-50 < myp5.pos_x+r && myp5.mouseY-20 > myp5.pos_y && myp5.mouseY-20 < myp5.pos_y+r) {
-//    myp5.fill(51,151,251);
-//  }
 
 function searchedDataByKeys() {
   var data = searchedData();
@@ -104,4 +102,18 @@ function searchedDataByKeys() {
   return a;
 }
 
+function searchedDataOrganised() {
+  var data = searchedData();
+  for (var i in data) {
+    values.push(Object.values(data[i]));
+    keys.push(Object.keys(data[i]));
+  }
+}
+
+//  if(myp5.mouseX-50 > myp5.pos_x && myp5.mouseX-50 < myp5.pos_x+r && myp5.mouseY-20 > myp5.pos_y && myp5.mouseY-20 < myp5.pos_y+r) {
+//    myp5.fill(51,151,251);
+//  }
+
 // return Object.keys(data).length;
+
+// var arr2D = new Array(5).fill(new Array(3));
