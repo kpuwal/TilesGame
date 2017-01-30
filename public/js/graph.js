@@ -1,5 +1,5 @@
 var r = 5;
-var grid, node;
+var grid = [];
 var values = [];
 var keys = [];
 
@@ -16,7 +16,13 @@ var sketch = function(graph) {
     graph.stroke('#ffffff');
     graph.fill('#1d1d1d');
     graph.textSize(8);
-    graph.node = new Node(1,1);
+    graph.nodesData = searchedDataByKeys();
+    graph.grid = new NodeGrid();
+    graph.grid.addNodes(1,1,1,1);
+    console.log(graph.nodes[3]);
+    console.log(keys);
+    
+
   };
 
   graph.draw = function() {
@@ -25,10 +31,17 @@ var sketch = function(graph) {
    graph.translate(50, 20);
    graph.text("depth",-35,-15,5,15);
    graph.text("-->",-12,-15,5,15);
-   graph.node.update(1,2);
+
+   for (var i=0; i<graph.nodes.length; i++) {
+     graph.nodes[i].render();
+   }
+
+
+  //  graph.node.update(1,2);
+  //  console.log(graph.node)
  };
 
- function Node(x,y,row,col) {
+ function Node(x,y) {
    this.pos_x = x;
    this.pos_y = y;
    this.ancestor = "";
@@ -39,7 +52,7 @@ var sketch = function(graph) {
    graph.push();
    graph.fill('#1d1d1d');
    graph.stroke('#ffffff');
-   graph.rect(graph.pos_x,graph.pos_y,r,r);
+   graph.rect(this.pos_x,this.pos_y,r,r);
    graph.pop();
  };
 
@@ -54,24 +67,33 @@ var sketch = function(graph) {
  Node.prototype.update = function(row,col) {
    this.assignAncestor(row,col);
    this.assignAddress(row,col);
-   this.render();
  };
 
- var NodeGrid = function(x,y) {
-   graph.x = x;
-   graph.y = y;
+ var NodeGrid = function() {
+  //  graph.x = x;
+  //  graph.y = y;
+  //  graph.row = row;
+  //  graph.col = col;
    graph.nodes =[];
-   graph.nodesData = searchedDataByKeys();
-   graph.row = [];
  };
 
- NodeGrid.prototype.addNodes = function() {
+ NodeGrid.prototype.addNodes = function(x,y,row,col) {
+  //  node = new Node(x,y,row,col);
+  //  graph.nodes.push(node);
+  //    console.log(node);
+
+
    for (var i=0; i<graph.nodesData.length; i++) {
      graph.text(i,r*i+4,-15,5,8);
      for (var j=0; j< graph.nodesData[i]; j++){
-       graph.nodes.push(new Node(graph.x*r*i, graph.y*j*r).render());
+       node = new Node(x*r*i,y*j*r);
+       node.update(row*i,col*j);
+
+      // node.update(row,col);
+       graph.nodes.push(node);
      }
    }
+
  };
 };
 
@@ -117,3 +139,10 @@ function searchedDataOrganised() {
 // return Object.keys(data).length;
 
 // var arr2D = new Array(5).fill(new Array(3));
+
+
+// if(graph.mouseX-100 > this.pos_x && graph.mouseX < this.pos_x+r && graph.mouseY-20 > this.pos_y && graph.mouseY < this.pos_y+r) {
+//   graph.fill(51,151,251);
+//  //  graph.ellipse(this.pos_x,this.pos_y, 4,4);
+//
+// }
