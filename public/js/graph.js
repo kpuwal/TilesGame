@@ -1,4 +1,5 @@
-var r = 5;
+var r = 2;
+var d = Math.pow(r,3);
 var grid = [];
 var values = [];
 var keys = [];
@@ -8,21 +9,19 @@ function drawGraph() {
 }
 
 var sketch = function(graph) {
-  var width = canvasWidth()*(r+1);
-  var height = canvasHeight()*r;
+  var width = canvasWidth()*(r*d);
+  var height = canvasHeight()*(r*d);
 
   graph.setup = function() {
-    graph.createCanvas(width+50, height);
-    graph.stroke('#ffffff');
+    graph.createCanvas(width+50, height+50);
+    graph.frameRate(30);
+    graph.noStroke();
     graph.fill('#1d1d1d');
     graph.textSize(8);
+    graph.rectMode('CENTER');
     graph.nodesData = searchedDataByKeys();
     graph.grid = new NodeGrid();
-    graph.grid.addNodes(1,1,1,1);
-    console.log(graph.nodes[3]);
-    console.log(keys);
-    
-
+    graph.grid.addNodes(d,d,1,1);
   };
 
   graph.draw = function() {
@@ -31,14 +30,9 @@ var sketch = function(graph) {
    graph.translate(50, 20);
    graph.text("depth",-35,-15,5,15);
    graph.text("-->",-12,-15,5,15);
-
-   for (var i=0; i<graph.nodes.length; i++) {
-     graph.nodes[i].render();
-   }
-
-
-  //  graph.node.update(1,2);
-  //  console.log(graph.node)
+console.log(graph.nodes[15]);
+   for(var j=0; j<keys.length; j++){ graph.text(j,d*r*j+4,-15,5,8); }
+   for (var i=0; i<graph.nodes.length; i++) { graph.nodes[i].render(); }
  };
 
  function Node(x,y) {
@@ -51,13 +45,18 @@ var sketch = function(graph) {
  Node.prototype.render = function(){
    graph.push();
    graph.fill('#1d1d1d');
-   graph.stroke('#ffffff');
-   graph.rect(this.pos_x,this.pos_y,r,r);
+   graph.noStroke();
+   graph.rect(this.pos_x+d,this.pos_y+d,r,r);
    graph.pop();
  };
 
  Node.prototype.assignAncestor = function(row,col) {
-   this.ancestor = keys[row][col-1];
+   this.ancestor = keys[row][col];
+   if (this.ancestor.length >= 2) {
+     this.ancestor = this.ancestor.slice(0, -1);
+   } else {
+     this.ancestor = "";
+   }
  };
 
  Node.prototype.assignAddress = function(row, col) {
@@ -70,30 +69,17 @@ var sketch = function(graph) {
  };
 
  var NodeGrid = function() {
-  //  graph.x = x;
-  //  graph.y = y;
-  //  graph.row = row;
-  //  graph.col = col;
    graph.nodes =[];
  };
 
  NodeGrid.prototype.addNodes = function(x,y,row,col) {
-  //  node = new Node(x,y,row,col);
-  //  graph.nodes.push(node);
-  //    console.log(node);
-
-
    for (var i=0; i<graph.nodesData.length; i++) {
-     graph.text(i,r*i+4,-15,5,8);
      for (var j=0; j< graph.nodesData[i]; j++){
        node = new Node(x*r*i,y*j*r);
        node.update(row*i,col*j);
-
-      // node.update(row,col);
        graph.nodes.push(node);
      }
    }
-
  };
 };
 

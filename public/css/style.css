@@ -90,9 +90,9 @@ header span {
 	font-family: Krungthep;
 	font-weight: bold;
 	position:relative;
-	-webkit-box-shadow:inset 0px 0px 0px 0.5px #fff;
+	/*-webkit-box-shadow:inset 0px 0px 0px 0.5px #fff;
   -moz-box-shadow:inset 0px 0px 0px 0.5px #fff;
-  box-shadow:inset 0px 0px 0px 0.5px #fff;
+  box-shadow:inset 0px 0px 0px 0.5px #fff;*/
 }
 
 .small_cell {
@@ -106,9 +106,9 @@ header span {
 	font-weight: bold;
 	position:relative;
 
-	-webkit-box-shadow:inset 0px 0px 0px 0.5px #1d1d1d;
+	/*-webkit-box-shadow:inset 0px 0px 0px 0.5px #1d1d1d;
   -moz-box-shadow:inset 0px 0px 0px 0.5px #1d1d1d;
-  box-shadow:inset 0px 0px 0px 0.5px #1d1d1d;
+  box-shadow:inset 0px 0px 0px 0.5px #1d1d1d;*/
 }
 
 .cell:hover {
