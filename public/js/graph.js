@@ -10,10 +10,11 @@ function drawGraph() {
 
 var sketch = function(graph) {
   var width = canvasWidth()*(r*d);
-  var height = canvasHeight()*(r*d);
+  var height = canvasHeight()*(r*d/4);
 
   graph.setup = function() {
     graph.createCanvas(width+50, height+50);
+    colorArray();
     graph.frameRate(30);
     graph.noStroke();
     graph.fill('#1d1d1d');
@@ -30,7 +31,6 @@ var sketch = function(graph) {
    graph.translate(50, 20);
    graph.text("depth",-35,-15,5,15);
    graph.text("-->",-12,-15,5,15);
-console.log(graph.nodes[15]);
    for(var j=0; j<keys.length; j++){ graph.text(j,d*r*j+4,-15,5,8); }
    for (var i=0; i<graph.nodes.length; i++) { graph.nodes[i].render(); }
  };
@@ -44,9 +44,10 @@ console.log(graph.nodes[15]);
 
  Node.prototype.render = function(){
    graph.push();
-   graph.fill('#1d1d1d');
-   graph.noStroke();
-   graph.rect(this.pos_x+d,this.pos_y+d,r,r);
+   graph.stroke('#1d1d1d');
+   graph.strokeWeight(0.3);
+   graph.noFill();
+   graph.rect(this.pos_x+d/2,this.pos_y/2,4,4);
    graph.pop();
  };
 
@@ -75,7 +76,7 @@ console.log(graph.nodes[15]);
  NodeGrid.prototype.addNodes = function(x,y,row,col) {
    for (var i=0; i<graph.nodesData.length; i++) {
      for (var j=0; j< graph.nodesData[i]; j++){
-       node = new Node(x*r*i,y*j*r);
+       node = new Node(x*r*i,y*j);
        node.update(row*i,col*j);
        graph.nodes.push(node);
      }
@@ -116,6 +117,17 @@ function searchedDataOrganised() {
     values.push(Object.values(data[i]));
     keys.push(Object.keys(data[i]));
   }
+}
+
+function colorArray() {
+  var colors = [];
+  var col_num = canvasWidth();
+  for (var i=0;i<col_num;i++){
+    var color = Math.floor(Math.random()*255);
+    colors.push(color);
+  }
+  console.log(colors);
+  return colors;
 }
 
 //  if(myp5.mouseX-50 > myp5.pos_x && myp5.mouseX-50 < myp5.pos_x+r && myp5.mouseY-20 > myp5.pos_y && myp5.mouseY-20 < myp5.pos_y+r) {
