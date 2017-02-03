@@ -3,6 +3,7 @@ var d = Math.pow(r,3);
 var grid = [];
 var values = [];
 var keys = [];
+var colors = [];
 
 function drawGraph() {
   var myp5 = new p5(sketch, 'graph_canvas');
@@ -14,12 +15,10 @@ var sketch = function(graph) {
 
   graph.setup = function() {
     graph.createCanvas(width+50, height+50);
-    colorArray();
     graph.frameRate(30);
     graph.noStroke();
     graph.fill('#1d1d1d');
     graph.textSize(8);
-    graph.rectMode('CENTER');
     graph.nodesData = searchedDataByKeys();
     graph.grid = new NodeGrid();
     graph.grid.addNodes(d,d,1,1);
@@ -32,21 +31,25 @@ var sketch = function(graph) {
    graph.text("depth",-35,-15,5,15);
    graph.text("-->",-12,-15,5,15);
    for(var j=0; j<keys.length; j++){ graph.text(j,d*r*j+4,-15,5,8); }
-   for (var i=0; i<graph.nodes.length; i++) { graph.nodes[i].render(); }
+   for (var i=0; i<graph.nodes.length; i++) {
+     graph.nodes[i].render(graph.nodes[i].node_color);
+   }
  };
 
  function Node(x,y) {
    this.pos_x = x;
    this.pos_y = y;
+   this.node_color = 0;
    this.ancestor = "";
    this.address = "";
  }
 
- Node.prototype.render = function(){
+ Node.prototype.render = function(color){
    graph.push();
-   graph.stroke('#1d1d1d');
-   graph.strokeWeight(0.3);
-   graph.noFill();
+   graph.noStroke();
+  //  graph.stroke('#1d1d1d');
+  //  graph.strokeWeight(0.3);
+   graph.fill(color, color,color);
    graph.rect(this.pos_x+d/2,this.pos_y/2,4,4);
    graph.pop();
  };
@@ -60,6 +63,11 @@ var sketch = function(graph) {
    }
  };
 
+ Node.prototype.assignColor = function() {
+   this.node_color = Math.floor(Math.random()*255);
+ };
+
+
  Node.prototype.assignAddress = function(row, col) {
    this.address = values[row][col];
  };
@@ -67,6 +75,7 @@ var sketch = function(graph) {
  Node.prototype.update = function(row,col) {
    this.assignAncestor(row,col);
    this.assignAddress(row,col);
+   this.assignColor();
  };
 
  var NodeGrid = function() {
@@ -78,6 +87,8 @@ var sketch = function(graph) {
      for (var j=0; j< graph.nodesData[i]; j++){
        node = new Node(x*r*i,y*j);
        node.update(row*i,col*j);
+      //  console.log(node);
+
        graph.nodes.push(node);
      }
    }
@@ -117,17 +128,6 @@ function searchedDataOrganised() {
     values.push(Object.values(data[i]));
     keys.push(Object.keys(data[i]));
   }
-}
-
-function colorArray() {
-  var colors = [];
-  var col_num = canvasWidth();
-  for (var i=0;i<col_num;i++){
-    var color = Math.floor(Math.random()*255);
-    colors.push(color);
-  }
-  console.log(colors);
-  return colors;
 }
 
 //  if(myp5.mouseX-50 > myp5.pos_x && myp5.mouseX-50 < myp5.pos_x+r && myp5.mouseY-20 > myp5.pos_y && myp5.mouseY-20 < myp5.pos_y+r) {
