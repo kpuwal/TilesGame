@@ -11,11 +11,12 @@ function drawGraph() {
 
 var sketch = function(graph) {
   var width = canvasWidth()*(r*d);
-  var height = canvasHeight()*(r*d/4);
+  var height = canvasHeight()*(r*d/2);
 
   graph.setup = function() {
     graph.createCanvas(width+50, height+50);
     graph.frameRate(30);
+    graph.colorMode(graph.HSB, 360);
     graph.noStroke();
     graph.fill('#1d1d1d');
     graph.textSize(8);
@@ -50,7 +51,7 @@ var sketch = function(graph) {
   //  graph.stroke('#1d1d1d');
   //  graph.strokeWeight(0.3);
    graph.fill(color, color,color);
-   graph.rect(this.pos_x+d/2,this.pos_y/2,4,4);
+   graph.rect(this.pos_x,this.pos_y,10,8);
    graph.pop();
  };
 
@@ -87,8 +88,6 @@ var sketch = function(graph) {
      for (var j=0; j< graph.nodesData[i]; j++){
        node = new Node(x*r*i,y*j);
        node.update(row*i,col*j);
-      //  console.log(node);
-
        graph.nodes.push(node);
      }
    }
@@ -127,6 +126,15 @@ function searchedDataOrganised() {
   for (var i in data) {
     values.push(Object.values(data[i]));
     keys.push(Object.keys(data[i]));
+  }
+}
+
+function findRelatives() {
+  for (var i=0; i<graph.nodes.length;i++){
+    if (graph.nodes[i] === "") {
+    } else {
+      findFamily();
+    }
   }
 }
 
