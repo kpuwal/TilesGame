@@ -1,36 +1,45 @@
 var r = 2;
 var d = Math.pow(r,3);
-var grid = [];
+var grid;
+var relative_path = "";
+var relative_color = "";
 var values = [];
 var keys = [];
 var colors = [];
+var nodes =[];
+var relatives = [];
 
 function drawGraph() {
-  var myp5 = new p5(sketch, 'graph_canvas');
+  var myp5 = new p5(graph, 'graph_canvas');
 }
 
-var sketch = function(graph) {
+var graph = function(graph) {
   var width = canvasWidth()*(r*d);
   var height = canvasHeight()*(r*d/2);
 
   graph.setup = function() {
-    graph.createCanvas(width+50, height+50);
+    graph.createCanvas(width+80, height+50);
     graph.frameRate(30);
     graph.colorMode(graph.HSB, 360);
     graph.noStroke();
     graph.fill('#1d1d1d');
     graph.textSize(8);
+
     graph.nodesData = searchedDataByKeys();
     graph.grid = new NodeGrid();
     graph.grid.addNodes(d,d,1,1);
+    nodes = Object.assign([], graph.nodes);
+    node = nodes.pop();
+    findRelatives(node);
   };
 
   graph.draw = function() {
-   graph.background(255);
+   graph.background('white');
    graph.push();
    graph.translate(50, 20);
    graph.text("depth",-35,-15,5,15);
    graph.text("-->",-12,-15,5,15);
+
    for(var j=0; j<keys.length; j++){ graph.text(j,d*r*j+4,-15,5,8); }
    for (var i=0; i<graph.nodes.length; i++) {
      graph.nodes[i].render(graph.nodes[i].node_color);
@@ -41,32 +50,30 @@ var sketch = function(graph) {
    this.pos_x = x;
    this.pos_y = y;
    this.node_color = 0;
-   this.ancestor = "";
+   this.path = "";
    this.address = "";
  }
 
  Node.prototype.render = function(color){
    graph.push();
-   graph.noStroke();
-  //  graph.stroke('#1d1d1d');
-  //  graph.strokeWeight(0.3);
-   graph.fill(color, color,color);
-   graph.rect(this.pos_x,this.pos_y,10,8);
+  //  graph.stroke('white');
+   graph.fill(color, 255,255);
+   graph.rect(this.pos_x,this.pos_y,d+r,d);
    graph.pop();
  };
 
  Node.prototype.assignAncestor = function(row,col) {
-   this.ancestor = keys[row][col];
-   if (this.ancestor.length >= 2) {
-     this.ancestor = this.ancestor.slice(0, -1);
-   } else {
-     this.ancestor = "";
-   }
+   this.path = keys[row][col];
+  //  if (this.path.length >= 2) {
+  //    this.path = this.path.slice(0, -1);
+  //  } else {
+  //    this.path = "";
+  //  }
  };
 
- Node.prototype.assignColor = function() {
-   this.node_color = Math.floor(Math.random()*255);
- };
+ // Node.prototype.assignColor = function() {
+ //   this.node_color = Math.floor(Math.random()*255);
+ // };
 
 
  Node.prototype.assignAddress = function(row, col) {
@@ -76,7 +83,7 @@ var sketch = function(graph) {
  Node.prototype.update = function(row,col) {
    this.assignAncestor(row,col);
    this.assignAddress(row,col);
-   this.assignColor();
+  //  this.assignColor();
  };
 
  var NodeGrid = function() {
@@ -129,14 +136,67 @@ function searchedDataOrganised() {
   }
 }
 
-function findRelatives() {
-  for (var i=0; i<graph.nodes.length;i++){
-    if (graph.nodes[i] === "") {
+function findRelatives(node) {
+  var node_path = "";
+  if (node.path === ""){
+    for (var i=0;i<nodes.length;i++) {
+      // assign maiin path color to each
+
+    }
+    // console.log(relatives);
+
+  } else {
+    console.log(isRelative);
+    if (isRelative) {
+      node.node_color = relative_color;
+      node_path = node.path.slice(0,-1);
+      relative = new Relative(node_path,node.node_color);
+      relatives.push(relative);
+      findRelatives(nodes.pop());
+
     } else {
-      findFamily();
+      var node_color = Math.floor(Math.random()*255);
+      node.node_color = node_color;
+      node_path = node.path.slice(0,-1);
+      relative = new Relative(node_path,node_color);
+      relatives.push(relative);
+      findRelatives(nodes.pop());
     }
   }
 }
+
+function isRelative(arr, path) {
+
+    // let i = arr.length;
+    // while (i--) {
+    //   // console.log("===one round===");
+    //   // console.log(arr[i].path);
+    //   // console.log(path);
+    //    if (arr[i].path === path) {
+    //        return true;
+    //    }
+    // }
+    // // console.log("===end===");
+    // return false;
+
+
+  for (var i=1; i<relatives.length; i++){
+    rel = relatives[i].path;
+    if (path == rel) {
+      relative_path = relatives[i].path;
+      relative_color = relatives[i].family_color;
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+
+var Relative = function(path,family_color) {
+  this.path = path;
+  this.family_color = family_color;
+};
 
 //  if(myp5.mouseX-50 > myp5.pos_x && myp5.mouseX-50 < myp5.pos_x+r && myp5.mouseY-20 > myp5.pos_y && myp5.mouseY-20 < myp5.pos_y+r) {
 //    myp5.fill(51,151,251);
