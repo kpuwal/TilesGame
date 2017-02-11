@@ -1,6 +1,6 @@
 def toBoolean(manhattan)
-  bmanhattan = manhattan.to_s == "true" ? true : false
-  return bmanhattan
+  ismanhattan = manhattan.to_s == "true" ? true : false
+  return ismanhattan
 end
 
 def toMatrix(status)

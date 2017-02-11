@@ -7,7 +7,6 @@ var values = [];
 var keys = [];
 var colors = [];
 var nodes =[];
-var relatives = [];
 
 function drawGraph() {
   var myp5 = new p5(graph, 'graph_canvas');
@@ -29,8 +28,9 @@ var graph = function(graph) {
     graph.grid = new NodeGrid();
     graph.grid.addNodes(d,d,1,1);
     nodes = Object.assign([], graph.nodes);
-    node = nodes.pop();
-    findRelatives(node);
+    // console.log(nodes);
+    // node = nodes.pop();
+    findRelatives(nodes);
   };
 
   graph.draw = function() {
@@ -40,8 +40,8 @@ var graph = function(graph) {
    graph.text("depth",-35,-15,5,15);
    graph.text("-->",-12,-15,5,15);
 
-   for(var j=0; j<keys.length; j++){ graph.text(j,d*r*j+4,-15,5,8); }
-   for (var i=0; i<graph.nodes.length; i++) {
+   for(let j=0; j<keys.length; j++){ graph.text(j,d*r*j+4,-15,5,8); }
+   for (let i=0; i<graph.nodes.length; i++) {
      graph.nodes[i].render(graph.nodes[i].node_color);
    }
  };
@@ -86,7 +86,7 @@ var graph = function(graph) {
   //  this.assignColor();
  };
 
- var NodeGrid = function() {
+ function NodeGrid() {
    graph.nodes =[];
  };
 
@@ -136,79 +136,37 @@ function searchedDataOrganised() {
   }
 }
 
-function findRelatives(node) {
-  var node_path = "";
-  if (node.path === ""){
-    for (var i=0;i<nodes.length;i++) {
-      // assign maiin path color to each
+// function findRelatives(node) {
+//   this._node = node;
+//   this.relatives = [];
+//   var relative_color;
+//
+//   var isRelative = function() {
+//     for (let i=0; i<this.relatives.length;i++) {
+//       if (this._node.path === this.relatives[i]) {
+//         relative_color = this.relatives[i].family_color;
+//         return true;
+//       } else {
+//         return false;
+//       }
+//     }
+//   }
+//
+//   if (this._node.path === "") {
+//     console.log("end");
+//   } else {
+//     if (isRelative()) {
+//       node_color = relative_color;
+//       node_path = node.path.slice(0,-1);
+//       relative = new Relative(node_path,node.node_color);
+//       relatives.push(relative);
+//       findRelatives(nodes.pop());
+//       console.log("here");
+//     }
+//   }
+// }
 
-    }
-    // console.log(relatives);
-
-  } else {
-    console.log(isRelative);
-    if (isRelative) {
-      node.node_color = relative_color;
-      node_path = node.path.slice(0,-1);
-      relative = new Relative(node_path,node.node_color);
-      relatives.push(relative);
-      findRelatives(nodes.pop());
-
-    } else {
-      var node_color = Math.floor(Math.random()*255);
-      node.node_color = node_color;
-      node_path = node.path.slice(0,-1);
-      relative = new Relative(node_path,node_color);
-      relatives.push(relative);
-      findRelatives(nodes.pop());
-    }
-  }
-}
-
-function isRelative(arr, path) {
-
-    // let i = arr.length;
-    // while (i--) {
-    //   // console.log("===one round===");
-    //   // console.log(arr[i].path);
-    //   // console.log(path);
-    //    if (arr[i].path === path) {
-    //        return true;
-    //    }
-    // }
-    // // console.log("===end===");
-    // return false;
-
-
-  for (var i=1; i<relatives.length; i++){
-    rel = relatives[i].path;
-    if (path == rel) {
-      relative_path = relatives[i].path;
-      relative_color = relatives[i].family_color;
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
-
-
-var Relative = function(path,family_color) {
+function Relative(path,family_color) {
   this.path = path;
   this.family_color = family_color;
 };
-
-//  if(myp5.mouseX-50 > myp5.pos_x && myp5.mouseX-50 < myp5.pos_x+r && myp5.mouseY-20 > myp5.pos_y && myp5.mouseY-20 < myp5.pos_y+r) {
-//    myp5.fill(51,151,251);
-//  }
-
-// return Object.keys(data).length;
-
-// var arr2D = new Array(5).fill(new Array(3));
-
-
-// if(graph.mouseX-100 > this.pos_x && graph.mouseX < this.pos_x+r && graph.mouseY-20 > this.pos_y && graph.mouseY < this.pos_y+r) {
-//   graph.fill(51,151,251);
-//  //  graph.ellipse(this.pos_x,this.pos_y, 4,4);
-//
-// }
