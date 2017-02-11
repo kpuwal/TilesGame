@@ -28,9 +28,7 @@ var graph = function(graph) {
     graph.grid = new NodeGrid();
     graph.grid.addNodes(d,d,1,1);
     nodes = Object.assign([], graph.nodes);
-    // console.log(nodes);
-    // node = nodes.pop();
-    findRelatives(nodes);
+    colorRelatives(nodes);
   };
 
   graph.draw = function() {
@@ -64,17 +62,7 @@ var graph = function(graph) {
 
  Node.prototype.assignAncestor = function(row,col) {
    this.path = keys[row][col];
-  //  if (this.path.length >= 2) {
-  //    this.path = this.path.slice(0, -1);
-  //  } else {
-  //    this.path = "";
-  //  }
  };
-
- // Node.prototype.assignColor = function() {
- //   this.node_color = Math.floor(Math.random()*255);
- // };
-
 
  Node.prototype.assignAddress = function(row, col) {
    this.address = values[row][col];
@@ -83,7 +71,6 @@ var graph = function(graph) {
  Node.prototype.update = function(row,col) {
    this.assignAncestor(row,col);
    this.assignAddress(row,col);
-  //  this.assignColor();
  };
 
  function NodeGrid() {
@@ -135,38 +122,3 @@ function searchedDataOrganised() {
     keys.push(Object.keys(data[i]));
   }
 }
-
-// function findRelatives(node) {
-//   this._node = node;
-//   this.relatives = [];
-//   var relative_color;
-//
-//   var isRelative = function() {
-//     for (let i=0; i<this.relatives.length;i++) {
-//       if (this._node.path === this.relatives[i]) {
-//         relative_color = this.relatives[i].family_color;
-//         return true;
-//       } else {
-//         return false;
-//       }
-//     }
-//   }
-//
-//   if (this._node.path === "") {
-//     console.log("end");
-//   } else {
-//     if (isRelative()) {
-//       node_color = relative_color;
-//       node_path = node.path.slice(0,-1);
-//       relative = new Relative(node_path,node.node_color);
-//       relatives.push(relative);
-//       findRelatives(nodes.pop());
-//       console.log("here");
-//     }
-//   }
-// }
-
-function Relative(path,family_color) {
-  this.path = path;
-  this.family_color = family_color;
-};
