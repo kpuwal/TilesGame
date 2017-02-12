@@ -1,6 +1,6 @@
-// "use strict";
-
 (function(exports){
+  "use strict";
+
   function colorRelatives(nodes) {
       if (nodes.length !== 0) {
         var node = nodes.pop();
@@ -40,12 +40,13 @@
     },
 
     assignColor: function(object) {
-      object.node_color = Math.floor(Math.random()*255);
-      return object;
+      var ind = hueCounter();
+      var new_object = createColor(object, ind).color();
+      return new_object;
     },
 
-    passColor: function(object, ancestor) {
-      ancestor.node_color = object.node_color;
+    passColor: function(object, ancestorObj) {
+      ancestorObj.node_color = object.node_color;
     },
 
     remove: function(object, array) {
@@ -53,6 +54,14 @@
       array.splice(indx,1);
       return array;
     },
-  }
+  };
+
+  var hueCounter = (function() {
+    var count = 0;
+    return function() {
+      return count++
+    };
+  })();
+
   exports.colorRelatives = colorRelatives;
 })(this);

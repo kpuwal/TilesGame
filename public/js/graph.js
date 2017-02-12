@@ -1,11 +1,6 @@
 var r = 2;
 var d = Math.pow(r,3);
 var grid;
-var relative_path = "";
-var relative_color = "";
-var values = [];
-var keys = [];
-var colors = [];
 var nodes =[];
 
 function drawGraph() {
@@ -13,8 +8,9 @@ function drawGraph() {
 }
 
 var graph = function(graph) {
-  var width = canvasWidth()*(r*d);
-  var height = canvasHeight()*(r*d/2);
+  var data = getData();
+  var width = data.canvasWidth()*(r*d);
+  var height = data.canvasHeight()*(r*d/2);
 
   graph.setup = function() {
     graph.createCanvas(width+80, height+50);
@@ -24,7 +20,7 @@ var graph = function(graph) {
     graph.fill('#1d1d1d');
     graph.textSize(8);
 
-    graph.nodesData = searchedDataByKeys();
+    graph.nodesData = data.byKeys();
     graph.grid = new NodeGrid();
     graph.grid.addNodes(d,d,1,1);
     nodes = Object.assign([], graph.nodes);
@@ -38,7 +34,7 @@ var graph = function(graph) {
    graph.text("depth",-35,-15,5,15);
    graph.text("-->",-12,-15,5,15);
 
-   for(let j=0; j<keys.length; j++){ graph.text(j,d*r*j+4,-15,5,8); }
+   for(let j=0; j<data.keys.length; j++){ graph.text(j,d*r*j+4,-15,5,8); }
    for (let i=0; i<graph.nodes.length; i++) {
      graph.nodes[i].render(graph.nodes[i].node_color);
    }
@@ -50,22 +46,21 @@ var graph = function(graph) {
    this.node_color = 0;
    this.path = "";
    this.address = "";
- }
+ };
 
  Node.prototype.render = function(color){
    graph.push();
-  //  graph.stroke('white');
-   graph.fill(color, 255,255);
+   graph.fill(color[0], 255, color[1]);
    graph.rect(this.pos_x,this.pos_y,d+r,d);
    graph.pop();
  };
 
  Node.prototype.assignAncestor = function(row,col) {
-   this.path = keys[row][col];
+   this.path = data.keys[row][col];
  };
 
  Node.prototype.assignAddress = function(row, col) {
-   this.address = values[row][col];
+   this.address = data.values[row][col];
  };
 
  Node.prototype.update = function(row,col) {
@@ -87,38 +82,3 @@ var graph = function(graph) {
    }
  };
 };
-
-function canvasWidth() {
-  var getStats = document.getElementById('stats').value;
-  var stats = JSON.parse(getStats);
-  return stats[2];
-}
-
-function canvasHeight() {
-  var data = searchedDataByKeys();
-  searchedDataOrganised();
-  return data.sort(function(a, b){ return b-a; })[0];
-}
-
-function searchedData() {
-  var searched = document.getElementById('searched').value;
-  searched = JSON.parse(searched);
-  return searched;
-}
-
-function searchedDataByKeys() {
-  var data = searchedData();
-  var a = [];
-  for (var i in data) {
-    a.push(Object.keys(data[i]).length);
-  }
-  return a;
-}
-
-function searchedDataOrganised() {
-  var data = searchedData();
-  for (var i in data) {
-    values.push(Object.values(data[i]));
-    keys.push(Object.keys(data[i]));
-  }
-}
