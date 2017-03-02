@@ -1,35 +1,25 @@
-# module LinearConflict
-#
-# def linearConflict(node)
-#   result = 0
-#   state = node.state
-#
-#   for i in 0..2 do
-#     result += findConflicts(state, i, 1)
-#   end
-#
-#   for i in 0..2 do
-#     result += findConflicts(state, i, 0)
-#   end
-#   return result
-# end
-#
-# def findConflicts(state, i, dimension)
-#   result = 0
-#   tilesRelated = []
-#
-#   for h in 0..1 && !tilesRelated.include?(h) {
-#    for (var k = h + 1; k < state.length && !tilesRelated.contains(h); k++) {
-#      var moves = dimension == 1
-#          ? this.inConflict(i, state[i][h], state[i][k], h, k, dimension)
-#          : this.inConflict(i, state[h][i], state[k][i], h, k, dimension);
-#
-#       if (moves == 0) continue;
-#       result += 2
-#       tilesRelated.push([h, k ])
-#       break
-#    }
-#   }
-#   return result;
-#   end
-# end
+module LinearConflict
+
+  def self.linearConflict(node)
+    state = node.state
+    result = 0
+
+    state.each { |row|
+      found = findRowConflict(row)
+      result += found
+    }
+    return result
+  end
+
+  def self.findRowConflict(array)
+    goal = [[1,2,3],[4,5,6],[7,8,0]]
+
+    3.times do |x|
+      # p x
+      # p "#{array[x]} #{array[x+1]}"
+      # p array
+    end
+
+      return 2
+  end
+end

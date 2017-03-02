@@ -5,11 +5,11 @@ require_relative 'graph_data'
 require_relative 'expand_node'
 
 class Game
-  attr_reader :status, :emptyRow, :emptyCol, :manhattan, :searched, :visited, :path
+  attr_reader :status, :emptyRow, :emptyCol, :manhattan, :searched, :visited, :path, :goal
 
   def initialize(status, emptyRow, emptyCol, manhattan)
     initial = Node.new(0, status, emptyRow, emptyCol, 0)
-    goal = Node.new(0, [[1,2,3],[4,5,6],[7,8,0]], 2, 2, 0)
+    @goal = Node.new(0, [[1,2,3],[4,5,6],[7,8,0]], 2, 2, 0)
     @astar = Astar.new(initial, goal, manhattan)
   end
 
@@ -18,7 +18,7 @@ class Game
     @astar.execute
   end
 
-  def aggregateStats
+  def aggregateGraphData
     visited = @astar.visited.length
     searched = @astar.searched.length
     path = @astar.path.length
@@ -35,7 +35,7 @@ class Game
   end
 
   def self.stats
-    @game.aggregateStats
+    @game.aggregateGraphData
   end
 
   def self.visited

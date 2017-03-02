@@ -1,7 +1,15 @@
 module ManhattanDistance
   def self.heuristic(node)
+
     result = 0
     goal = [[1,2,3],[4,5,6],[7,8,0]]
+
+    # state = node.state
+    # state.each { |x|
+    #   x.each { |y|
+    #     state
+    #   }
+    # }
 
     for i in 0..2 do
       for j in 0..2 do

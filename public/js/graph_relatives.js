@@ -9,7 +9,18 @@
       }
   };
 
-  function filter(object, ancestorObj, array) {
+  function findRelatives(object, array) {
+    if (typeof object === "object" && object.path.length !== 0) {
+      var ancestor = relative.findAncestor(object);
+      var filtered = filterRelatives(object, ancestor, array);
+      relative.remove(filtered, array);
+      findRelatives(filtered, array);
+    } else {
+      colorRelatives(array);
+    }
+  };
+
+  function filterRelatives(object, ancestorObj, array) {
     var current = array.filter(function(object){
       return object.path === ancestorObj;
     });
@@ -18,17 +29,6 @@
       current = current.pop();
       relative.passColor(object, current);
       return current;
-    } else {
-      colorRelatives(array);
-    }
-  };
-
-  function findRelatives(object, array) {
-    if (typeof object === "object" && object.path.length !== 0) {
-      var ancestor = relative.findAncestor(object);
-      var filtered = filter(object, ancestor, array);
-      relative.remove(filtered, array);
-      findRelatives(filtered, array);
     } else {
       colorRelatives(array);
     }

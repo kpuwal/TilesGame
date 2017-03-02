@@ -1,14 +1,16 @@
 require_relative 'misplaced_tiles'
 require_relative 'manhattan_distance'
+require_relative 'linear_conflict'
 require_relative 'astar'
 require_relative 'node'
 require_relative 'deep_clone'
 
 class ExpandNode
-  extend ManhattanDistance, MisplacedTiles
-  attr_accessor :visited, :queue, :manhattan
+  extend ManhattanDistance, MisplacedTiles, LinearConflict
+  attr_accessor :visited, :queue, :manhattan, :goal
 
   def initialize(node)
+    @goal = goal
     @newState = node.state
     @row = node.emptyRow
     @column = node.emptyCol
@@ -76,7 +78,7 @@ class ExpandNode
 
   def update(newNode, visited, queue, manhattan)
     if manhattan
-      newNode.value = newNode.depth + ManhattanDistance.heuristic(newNode)
+      newNode.value = newNode.depth + ManhattanDistance.heuristic(newNode) + LinearConflict.linearConflict(newNode)
     else
       newNode.value = newNode.depth + MisplacedTiles.heuristic(newNode)
     end
