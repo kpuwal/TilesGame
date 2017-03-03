@@ -28,6 +28,8 @@
       nodes = Object.assign([], graph.nodes);
       colorRelatives(nodes);
       graph.drawNodes();
+      graph.renderEdges();
+
     };
 
     graph.drawNodes = function() {
@@ -35,11 +37,40 @@
      graph.translate(60, 20);
      graph.text("depth",-40,-15,5,15);
      graph.text("-->",-17,-15,5,15);
-
      for(let j=0; j<data.keys.length; j++){ graph.text(j,d*r*j-2,-15,5,8); }
+
      for (let i=0; i<graph.nodes.length; i++) {
        graph.nodes[i].render(graph.nodes[i].node_color);
      }
+    };
+
+    var findEdges = function() {
+      var arr =[];
+      if (graph.nodes.length > 0) {
+        for (let i=graph.nodes.length-1; i>0; i--) {
+          var current = graph.nodes[i];
+          if (current.node_color[0] === 0 && current.node_color[0] === 0) {
+            arr.push(current);
+          };
+        }
+      }
+      console.log(arr);
+      return arr;
+    };
+
+    graph.renderEdges = function() {
+      graph.push();
+      graph.strokeWeight(1);
+      graph.stroke('black');
+
+      for (let i=0; i<findEdges().length-1; i++) {
+        var x1 = findEdges()[i].pos_x;
+        var y1 = findEdges()[i].pos_y;
+        var x2 = findEdges()[i+1].pos_x;
+        var y2 = findEdges()[i+1].pos_y;
+        graph.line(x1, y1, x2, y2);
+      }
+      graph.pop();
     };
 
     Node.prototype.render = function(color){
