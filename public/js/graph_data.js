@@ -41,12 +41,12 @@
       return arr;
     },
 
-    canvasWidth: function() {
+    canvasHeight: function() {
       this.stats = this._parse(this.stats);
       return this.stats[2];
     },
 
-    canvasHeight: function() {
+    canvasWidth: function() {
       var data = this.byKeys();
       return data.sort(function(a, b){ return b-a; })[0];
     },
