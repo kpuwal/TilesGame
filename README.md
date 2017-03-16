@@ -1,54 +1,65 @@
-<img width="846" alt="screenshot" src="public/img/screenshot.png">
+<img width="846" alt="screenshot" src="public/img/screenshot1.png">
 
+#### Problem
+The purpose of this puzzle is to arrange tiles so that all of them are in the correct positions. The rearrangement task is achieved by swapping an empty tile with some other tile in all possible directions (up, down, left, and right).
 
+#### Solution
+The problem is solved by implementing A-star search algorithm that finds a solution with the minimum number of moves to the goal configuration. The search is guided by three different heuristics, and the more clever heuristic, the sooner the optimal solution will be found.
 
-## Pseudo-Code
+The intelligence of the search is determined by a number of states it visits - the smaller the number of states, the more intelligent it is and the sooner it will provide a solution.
+My Manhattan Distance heuristic calculates solution in 0.26s.
 
-A* algorithm
-
-initialize the open list
-initialize the closed list
-put the starting node on the open list (you can leave its f at zero)
-
-while the open list is not empty
-   find the node with the least f on the open list, call it "q"
-   pop q off the open list
-   generate q's 8 successors and set their parents to q
-   for each successor
-     if successor is the goal, stop the search
-       successor.g = q.g + distance between successor and q
-       successor.h = distance from goal to successor
-       successor.f = successor.g + successor.h
-
-       if a node with the same position as successor is in the OPEN list \
-           which has a lower f than successor, skip this successor
-       if a node with the same position as successor is in the CLOSED list \
-           which has a lower f than successor, skip this successor
-       otherwise, add the node to the open list
-   end
-   push q on the closed list
-end
-
-## Motivation
-
+##### Motivation
 Study for fun.
 
-## Installation
+#### Setup
+After cloning the project, enter the following lines on the command-line:
 
+```
+$ bundle install
+$ ruby app.rb
+```
+#### Test
+```
+$ rspec
+```
 
+#### References
 
-## API Reference
+[Arnaldo Perez Castano] (https://www.smashingmagazine.com/2016/02/javascript-ai-html-sliding-tiles-puzzle/)
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+----
 
-## Tests
+#### Notes
+##### MVP
+```
+Ruby implemented A* search algorithm with Manthatan Distance and Misplaced Tiles heuristics.
+```
+##### V2
+```
+Interactive interface
+- JavaScript
+- p5.js
+- ajax, jQuery
+```
+```
+Player is able to generate graph made of open list nodes sorted according to depth
+```
 
-Describe and show how to run the tests with code examples.
+##### To be implemented
+I like this project so much that it's constantly growing.
 
-## Contributors
+```
+Force directed (spring systems) graph tree representing all nodes in order.
+```
+```
+Linear Conflict heuristic that will improve the timing.
+```
 
-REFERENCES: [Arnaldo Perez Castano] (https://www.smashingmagazine.com/2016/02/javascript-ai-html-sliding-tiles-puzzle/)
+----
 
-## License
-
-A short snippet describing the license (MIT, Apache, etc.)
+##### Things I have learnt from this project:
+- Breadth-first search algorithm
+- A-star algorithm
+- Priority Queues
+- Admissable Heuristics (Misplaced Tiles, Manhattan Distance and Linear Conflict)
