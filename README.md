@@ -23,10 +23,12 @@ $ ruby app.rb
 ```
 $ rspec
 ```
+#### Heroku
+[Tiles Game](https://tiles-game.herokuapp.com/)
 
 #### References
 
-[Arnaldo Perez Castano] (https://www.smashingmagazine.com/2016/02/javascript-ai-html-sliding-tiles-puzzle/)
+[Arnaldo Perez Castano](https://www.smashingmagazine.com/2016/02/javascript-ai-html-sliding-tiles-puzzle/)
 
 ----
 
