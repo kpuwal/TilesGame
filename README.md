@@ -64,4 +64,4 @@ Linear Conflict heuristic that will improve the timing.
 - Breadth-first search algorithm
 - A-star algorithm
 - Priority Queues
-- Admissable Heuristics (Misplaced Tiles, Manhattan Distance and Linear Conflict)
+- Admissible Heuristics (Misplaced Tiles, Manhattan Distance and Linear Conflict)
