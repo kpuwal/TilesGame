@@ -8,11 +8,11 @@ feature 'Button', :js => true do
     expect(page).to have_content "Step: 0 -> D, Step: 1 -> L,"
   end
 
-  scenario 'Start Again starts the game over', :driver => :poltergeist do
+  scenario 'Start Over restarts the game', :driver => :poltergeist do
     visit('/')
     click_on('Solve')
     expect(page).to have_content 'DLURULDLURDDLURRDLUURDLDR'
-    click_button("Start Again")
+    click_button("Start Over")
     visit(current_path)
     expect(page).not_to have_content 'DLURULDLURDDLURRDLUURDLDR'
   end

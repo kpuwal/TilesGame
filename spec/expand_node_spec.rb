@@ -5,7 +5,7 @@ describe ExpandNode do
 
   let(:initial_node) { double(value: 0, state: [[7,5,0],[6,2,4],[8,3,1]], emptyRow:  0, emptyCol: 2, depth: 0, stringRepresentation: "7,5,0,6,2,4,8,3,1", path: "" ) }
 
-  let(:goal_node) { double(value: 18, state: [[7,5,4],[6,2,1],[8,3,0]], emptyRow: 2, emptyCol: 2, depth: 2, stringRepresentation: "7,5,4,6,2,1,8,3,0", path: "DD") }
+  let(:goal_node) { double(value: 24, state: [[7,5,4],[6,2,1],[8,3,0]], emptyRow: 2, emptyCol: 2, depth: 2, stringRepresentation: "7,5,4,6,2,1,8,3,0", path: "DD") }
 
   let(:heuristic) { double(true) }
 

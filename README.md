@@ -1,4 +1,4 @@
-<img width="846" alt="screenshot" src="public/img/screenshot1.png">
+<img alt="screenshot" src="public/img/screenshot1.png">
 
 #### Problem
 The purpose of this puzzle is to arrange tiles so that all of them are in the correct positions. The rearrangement task is achieved by swapping an empty tile with some other tile in all possible directions (up, down, left, and right).
@@ -49,8 +49,6 @@ Player is able to generate graph made of open list nodes sorted according to dep
 ```
 
 ##### To be implemented
-I like this project so much that it's constantly growing.
-
 ```
 Force directed (spring systems) graph tree representing all nodes in order.
 ```
